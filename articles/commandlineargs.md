@@ -29,6 +29,7 @@
 |   -debug                    |   启用调试模式   |
 |   -branch [分支]          |   设置要使用的分支([分支]需要替换为release、rc或dev)   |
 |   -skipprocessconfirmation  |   跳过关闭已运行的GTA V/alt:V实例的确认消息   |  
+|   -linux                    |   启用 linux 模式   |
 
 ## 服务器命令
 
