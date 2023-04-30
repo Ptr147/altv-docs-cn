@@ -1,22 +1,22 @@
-# Nametag example
+# 名字标签示例
 
-This article deals with name tags as RmlUi example.
-All used files for this example can be found in the following [repository](https://github.com/altmp/altv-example-resources/tree/master/rml-nametags).
+本文介绍名称标签作为RmlUi示例。
+此示例使用的所有文件可以在以下[仓库](https://github.com/altmp/altv-example-resources/tree/master/rml-nametags)中找到。
 
-## Requirements
+## 要求
 
-- Some code editor (for example Visual Studio Code)
-- Basic knowledge of HTML & CSS
-- A font file (.ttf)
-- Empty resource with `Client` subfolder and `Client/main.js` as entry point
+- 一些代码编辑器(例如Visual Studio Code)
+- 基本的HTML和CSS知识
+- 字体文件(.ttf)
+- 空资源与`Client`子文件夹和`Client/main.js`作为入口点
 
-## Creating the rml document
+## 创建rml文档 
 
 > [!TIP]
-> In this example `arialbd.ttf` is used as font, which can be found in the repository mentioned at the beginning.
+> 在此示例中使用`arialbd.ttf`作为字体,可以在上面提到的仓库中找到。
 
-Creating an Rml document is relatively simple and, except for the leading `<rml>` tag and the XHTML1 standard, is no different from creating an .html file.\
-We create the file `index.rml` in the `Client` subfolder and add the following content there:
+创建Rml文档相对简单,除了前导`<rml>`标签和XHTML1标准之外,与创建.html文件没有什么不同。\
+我们在`Client`子文件夹中创建`index.tml`文件,并在其中添加如下内容:
 
 ```html
 <!-- For RmlUi documents we have to begin our html with the <rml> tag --> 
