@@ -118,8 +118,8 @@ alt.on("gameEntityCreate", (entity) => {
     rmlElement.addClass("nametag");
     rmlElement.addClass("hide");
 
-    / 根据顶部的配置,我们会根据配置绘制不同的姓名标签 
-     // 如果没有配置适用于实体类型,我们将销毁RmlElement
+    // 根据顶部的配置,我们会根据配置绘制不同的姓名标签 
+    // 如果没有配置适用于实体类型,我们将销毁RmlElement
     if (entity instanceof alt.Player) {
         if (showPlayerIds && !showPlayerNames)
             rmlElement.innerRML = `ID: ${entity.id}`;
