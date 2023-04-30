@@ -1,8 +1,8 @@
-- name: Server config
+- name: 服务端配置
   href: server.md
-- name: Client config
+- name: 客户端配置
   href: client.md
-- name: Resource config
+- name: 资源配置
   href: resource.md
-- name: Stream config
+- name: 流配置
   href: stream.md
