@@ -18,4 +18,5 @@ files = [
 # 您的DLC的GXT条目
 [gxt]  
 "myveh" = "我的车辆"
+
 ```
