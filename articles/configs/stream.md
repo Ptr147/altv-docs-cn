@@ -1,22 +1,21 @@
-# The `stream.toml` configuration file
+# `stream.toml` 配置文件
 
-The `stream.toml` configuration file is needed for every dlc resource, e.g. a new vehicle. It has some configuration options like the GXT values and meta files.
+`stream.toml` 配置文件对每个DLC资源(例如新车辆)都是必需的。它包含一些配置选项,如GXT值和元文件。
 
-Here is a list of all configuration options for the `stream.toml` and what they are used for:
-```toml
-# An array containing all files that should be loaded for this dlc
+以下是 `stream.toml` 中所有配置选项及其用途的列表:
+```toml  
+# 包含应为此DLC加载的所有文件
 files = [
-    # You can also use glob patterns to give access to a whole directory
-    "stream/assets/*"
+    # 您还可以使用通配符模式提供对整个目录的访问权限
+    "stream/assets/*"  
 ]
-# The meta files your dlc uses
-[meta]
-"stream/carcols.meta" = "CARCOLS_FILE"
+# 您的DLC使用的元文件
+[meta]  
+"stream/carcols.meta" = "CARCOLS_FILE"  
 "stream/vehicles.meta" = "VEHICLE_METADATA_FILE"
 "stream/handling.meta" = "HANDLING_FILE"
 
-# The GXT entries for your dlc
-[gxt]
-"myveh" = "My vehicle"
-
+# 您的DLC的GXT条目
+[gxt]  
+"myveh" = "我的车辆"
 ```
