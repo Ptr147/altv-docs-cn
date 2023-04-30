@@ -19,14 +19,14 @@
 我们在`Client`子文件夹中创建`index.tml`文件,并在其中添加如下内容:
 
 ```html
-<!-- For RmlUi documents we have to begin our html with the <rml> tag --> 
-<rml>
-    <!-- Everything else is simply html based on XHTML1 standard -->
+<!-- 对RML UI文档来说,我们的HTML必须以<rml> 标签开始 --> 
+<rml> 
+     <!-- 其他的全是基于XHTML 1标准的HTML --> 
     <head>
-        <title>Demo</title>
+        <title>演示</title>
         <style>
             body, #nametag-container {
-                /* The font-family needs to be contained in the font file we will load later */
+                <!-- 字体需要包含我们后面要加载的字体文件 -->     
                 font-family: arial;
                 font-weight: bold;
                 font-style: normal;
@@ -53,34 +53,34 @@
         </style>
     </head>
     <body>
-    <!-- This is the container we will use later in our client script -->
+    <!-- 这是我们后面客户端脚本中将使用的容器 --> 
     <div id="nametag-container"></div>
     </body>
 </rml>
 ```
 
-## Creating the client script
+## 创建客户端脚本 
 
 > [!TIP]
-> Although JavaScript is used in this example, it can also be used with C# and other modules.
-> Further information can be found in the respective modules documentation.
+> 尽管这个示例中使用了JavaScript,它也可以与C#和其他模块一起使用。 
+> 可以在各个模块的文档中找到更多信息。
 
-After we have created our `index.rml` we create our script file named `main.js` in the same folder.\
-In this file we put the following content, which will be described in more detail by the comments:
+创建我们的`index.rml`后,我们在同一文件夹中创建名为`main.js`的脚本文件。 
+在这个文件中,我们添加以下内容,稍后将根据注释对其进行详细说明:
 
 ```js
 import * as alt from "alt-client";
 import * as native from "natives";
 
-// ---------------- Config ----------------
-// showVehicleIds: `true` vehicles will also have nametags containing their id
-// showPlayerIds: `true` player nametags will contain the id
-// showPlayerNames: `true` player nametags will contain their name
-// checkLoS: `true` line of sight is required to draw the nametags
-// dynamicSize: `true` size increases or decreases depending on the distance to the entity
-// controlKey: `79` toggle key for activating or deactivating the rml controls. 79 is the O key
+// ---------------- 配置 ---------------- 
+// showVehicleIds:`true` 如果为true,车辆的姓名标签也将包含其ID 
+// showPlayerIds:`true` 如果为true,玩家的姓名标签将包含其ID 
+// showPlayerNames:`true` 如果为true,玩家的姓名标签将包含其名称 
+// checkLoS:`true` 如果为true,需要视线才能绘制姓名标签 
+// dynamicSize:`true` 如果为true,大小会根据实体的距离增加或减小 
+// controlKey:`79` 激活或停用RML控件的切换键。79是O键 
 // 
-// NOTE: For players either id, name or both settings have to be enabled, else there will no nametags be drawn
+// 注意:对于玩家,要么启用ID,要么启用名称,要么两者都启用,否则不会绘制姓名标签
 
 const showVehicleIds = true;
 const showPlayerIds = true;
@@ -94,32 +94,32 @@ const controlKey = 79;
 
 alt.RmlElement.prototype.shown = false;
 
-// ---------------- Script ----------------
-// All the code. More detailed instructions will be included to the lines
+/ ---------------- 脚本 ----------------
+// 所有的代码。每行都会包含更详细的说明 
+// 对于RML,您必须加载需要的字体,以便可以使用它 
 
-// For rml you have to load the required font so it can be used
 alt.loadRmlFont("/Client/arialbd.ttf", "arial", false, true);
-// Creating a new rml document. This is similar to creating a new WebView
+// 创建一个新的RML文档。这类似于创建一个新的Web视图
 const document = new alt.RmlDocument("/Client/index.rml");
-// We're storing the nametag-container for further usage, e.g. adding and removing nametags
+// 我们存储nametag-container以供进一步使用,例如添加和删除姓名标签
 const container = document.getElementByID("nametag-container");
-// We use a map to simplify the mapping of entity and RmlElement
+// 我们使用map简化实体和RmlElement之间的映射
 const nameTags = new Map();
-// This variable will store the id of our everyTick, so we can disable it as soon as there are no nametags to draw
+// 这个变量将存储我们每次滴答的ID,以便在没有姓名标签要绘制时立即禁用它
 let tickHandle = undefined;
 
-// We will use the gameEntityCreate event to add new nametags to our container
+// 我们将使用gameEntityCreate事件向容器添加新姓名标签
 alt.on("gameEntityCreate", (entity) => {
-    // Create a <button> html element and store it in the variable rmlElement
+    // 创建一个<button> HTML元素并将其存储在rmlElement变量中
     const rmlElement = document.createElement("button");
-    // Set the id property of the html element
+    // 设置HTML元素的id属性
     rmlElement.id = entity.id.toString();
-    // Add our classes to apply stylings
+    // 添加我们的类以应用样式
     rmlElement.addClass("nametag");
     rmlElement.addClass("hide");
 
-    // As setup in the config on the top, we will draw different nametags depending on the config
-    // If no configuration applies for the entity type we will destroy the RmlElement
+    / 根据顶部的配置,我们会根据配置绘制不同的姓名标签 
+     // 如果没有配置适用于实体类型,我们将销毁RmlElement
     if (entity instanceof alt.Player) {
         if (showPlayerIds && !showPlayerNames)
             rmlElement.innerRML = `ID: ${entity.id}`;
@@ -138,113 +138,113 @@ alt.on("gameEntityCreate", (entity) => {
         return;
     }
 
-    // Adding the RmlElement and Entity to our map
+    // 将RmlElement和Entity添加到我们的map中 
     nameTags.set(entity, rmlElement);
-    // Adding the RmlElement to our RmlDocument. As soon as the class "hide" gets removed it will get drawn
+    // 将RmlElement添加到我们的RmlDocument。一旦删除了“hide”类,它就会被绘制 
     container.appendChild(rmlElement);
-    // We subscribe the click event so we can print out the entity coordinates if we want to
+    // 我们订阅单击事件,以便在需要时打印出实体坐标 
     rmlElement.on("click", printCoordinates);
 
-    // If there is already an everyTick active we can just return, else we will start our everyTick
+    // 如果已经激活了everyTick,我们可以直接返回,否则我们将启动我们的everyTick 
     if (tickHandle !== undefined) return;
     tickHandle = alt.everyTick(drawMarkers);
 });
 
-// Same as gameEntityCreate event, but here we will remove the nametags
+// 与gameEntityCreate事件相同,但在这里我们将删除姓名标签 
 alt.on("gameEntityDestroy", (entity) => {
-    // We get the rmlElement for the entity from our map
+    // 我们从地图中获取实体的rmlElement 
     const rmlElement = nameTags.get(entity);
-    // If there's nothing found, e.g. because the creation conditions didn't matched we can just return here
+    // 如果没有找到,例如因为创建条件不匹配,我们可以在这里直接返回 
     if (rmlElement === undefined) return;
-    // Removing the RmlElement from the container...
+    // 从容器中删除RmlElement...... 
     container.removeChild(rmlElement);
-    // ... and ending its existence.
+     // ...并结束其存在。
     rmlElement.destroy();
-    // Delete from nametag map
+     // 从姓名标签映射中删除 
     nameTags.delete(entity);
 
-    // If there are no more nametags left we stop the everyTick to save performance
+    // 如果没有更多的姓名标签剩下,我们停止每次滴答以节省性能 
     if (tickHandle === undefined || nameTags.size > 0) return;
     alt.clearEveryTick(tickHandle);
     tickHandle = undefined;
 });
 
-// We use the keyup event to enable or disable the controls
+// 我们使用keyup事件启用或禁用控件 
 alt.on("keyup", (key) => {
-    // If the key isn't our control key we don't need any further processing
+    // 如果键不是我们的控制键,我们不需要任何进一步处理 
     if (key !== controlKey) return;
 
-    // Getting the current control state
+    // 获取当前的控制状态 
     const currentState = alt.rmlControlsEnabled();
     if (currentState) {
-        // And disabling the controls if it's already enabled...
+       // 如果已经启用,则禁用控件...... 
         alt.toggleGameControls(true);
         alt.showCursor(false);
         alt.toggleRmlControls(false);
     } else {
-        // Or enable if it's disabled
+        // 或者如果已禁用,则启用
         alt.toggleGameControls(false);
         alt.showCursor(true);
         alt.toggleRmlControls(true);
     }
 });
 
-// This function gets called from the click event
-// The event args can be found in the rmlui documentation: https://mikke89.github.io/RmlUiDoc/pages/rml/events.html
+// 此功能来自单击事件 
+// 事件参数可以在rmlui文档中找到:https://mikke89.github.io/RmlUiDoc/pages/rml/events.html 
 function printCoordinates(rmlElement, eventArgs) {
-    // Here we access the id we prior set to the rmlElement
+    // 在这里我们访问先前设置给rmlElement的id 
     const entity = alt.Entity.getByID(parseInt(rmlElement.id));
     alt.log("Entity Position", "X", entity.pos.x, "Y", entity.pos.y, "Z", entity.pos.z);
 }
 
-// This function gets called from our everyTick
+// 此功能来自我们的everyTick 
 function drawMarkers() {
-    // We loop through all entities in our map
+    // 我们循环遍历地图中的所有实体
     nameTags.forEach((rmlElement, entity) => {
-        // Get their position
+        // 获取它们的位置 
         const {x, y, z} = entity.pos;
 
-        // Check if they're on the screen and optionally if line of sight check is enabled if there's nothing between us
+        // 检查它们是否在屏幕上,并且如果启用了视线检查,则在我们之间没有障碍, 
         if (!native.isSphereVisible(x, y, z, 0.0099999998) || (checkLoS && !native.hasEntityClearLosToEntity(alt.Player.local, entity, 17))) {
-            // If we can't see it and the RmlElement is already hidden we can just return
+            // 如果我们看不到它,并且RmlElement已经隐藏,我们可以直接返回 
             if (!rmlElement.shown) return;
 
-            // Else we're going to hide it by adding the css class...
+            // 否则我们要通过添加css类来隐藏它......
             rmlElement.addClass("hide");
-            // ... and setting our custom property
+             // ...并设置我们的自定义属性
             rmlElement.shown = false;
         } else {
-            // Entity is visible, so we check if the RmlElement may be still hidden
+            // 实体可见,所以我们检查RmlElement是否仍然隐藏 
             if (!rmlElement.shown) {
-                // If yes we remove our hide class...
+                 // 如果是,我们删除隐藏类...... 
                 rmlElement.removeClass("hide");
-                // ... and set the shown property to true
+                // ...并将shown属性设置为true 
                 rmlElement.shown = true;
             }
 
-            // Now we get the screen coordinates of the entity
+            // 现在我们获取实体的屏幕坐标
             const {x: screenX, y: screenY} = alt.worldToScreen(x, y, z + 2);
-            // And apply it to our RmlElement
+            // 并将其应用于我们的RmlElement
             rmlElement.style["left"] = `${screenX}px`;
             rmlElement.style["top"] = `${screenY}px`;
 
-            // If dynamic size is disabled we can simply return here ...
+            // 如果动态大小被禁用,我们可以简单地在这里返回...... 
             if (!dynamicSize) return;
-            // ... else we check the distance, in this example we will use a minimum size of 1dp and maximum size of 50dp
-            // which gets applied based on the distance from 1 to 100 meter. Everything below or above will either use
-            // 1 or 50 as font size.
+            // ...否则我们检查距离,在这个例子中,我们将使用最小尺寸1dp和最大尺寸50dp 
+            // 这将根据从1到100米的距离应用。低于或高于的所有内容将使用
+            // 1或50作为字体大小。
             const fontSizeModificator = Math.min(entity.pos.distanceTo(alt.Player.local.pos) / 100, 1);
             const fontSize = (1 - fontSizeModificator) * 50;
-            // And after calculating it we modify the style property to use the new font size
+            // 计算后,我们修改样式属性以使用新的字体大小
             rmlElement.style["font-size"] = `${fontSize}dp`;
         }
     });
 }
 ```
 
-## Summary
+## 总结
 
-After we have created both the `index.rml` and the `main.js` as well as added our font file, the RmlUi resource is ready to use.
+在我们同时创建了`index.rml`和`main.js`以及添加了字体文件之后,RmlUi 资源已经准备就绪。
 
-What is especially noticeable here is that HTML elements can be controlled directly via the client code and thus updates can take place without events.\
-This is one of the reasons why RmlUi can achieve a higher performance.
+尤其值得注意的是,HTML元素可以直接通过客户端代码控制,因此可以在没有事件的情况下进行更新。  
+这就是RmlUi可以达到更高性能的原因之一。
