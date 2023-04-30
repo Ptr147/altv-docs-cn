@@ -1,14 +1,14 @@
-# Direct Connect Protocol
+#直接连接协议
 
-This protocol can be used, to connect to an alt:V server over the browser.
+此协议可用于通过浏览器连接到alt:V服务器。
 
-## CDN off
-If your server doesn't use the cdn function, you need to use the IP-Address and the port of the server.
+## CDN关闭 
+如果您的服务器不使用cdn功能,您需要使用服务器的IP地址和端口。
 
-`altv://connect/${IP_ADDRESS}:${PORT}?password=${PASSWORD}` or a example `altv://connect/127.0.0.1:7788?password=xyz`
+`altv://connect/${IP_ADDRESS}:${PORT}?password=${PASSWORD}` 或者例如`altv://connect/127.0.0.1:7788?password=xyz`
 
-## CDN on
+## CDN开启  
 
-If you are using the cdn function, you need to use the direct connect url to the cdn.
+如果您正在使用cdn功能,您需要使用cdn的直接连接URL。
 
-`altv://connect/http://{CDN_URL}?password=${PASSWORD}` or a example `altv://connect/http://connect.example.com?password=xyz`
+`altv://connect/http://{CDN_URL}?password=${PASSWORD}` 或者例如`altv://connect/http://connect.example.com?password=xyz` 
