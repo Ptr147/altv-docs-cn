@@ -1,14 +1,14 @@
-# CDN Links
+# CDN 链接
 
-Here you can find the CDN-Links(=Content Delivery Network) for the alt:V files. It's recommended to use the [Downloads-Page](https://altv.mp/#/downloads) where the files get automatically bundled for you.
+在这里您可以找到alt:V文件的CDN链接(=内容分发网络)。建议使用[下载页面](https://altv.mp/#/downloads)，其中文件会自动打包。
 
-Valid values for ${BRANCH} are: **release**, **rc** and **dev**.
+ ${BRANCH} 的有效值是: **release**, **rc** 和 **dev**.
 
-update.json file contains build number, file locations and sha1 hashes.
+update.json 文件包含构建号,文件位置和 sha1 哈希。
 
-## Link Generator
+## 链接生成器
 
-<p>You can also use this Generate to create the needed links, just select the components you need and if you need the links for the update.json.
+<p>您还可以使用此生成器来创建所需的链接,只需选择您需要的组件,并在需要时选择update.json的链接。 
 <div id="CDN_Link_Generator-interface" style="display: flex; justify-content: space-between; max-width: 800px;"> </div>
 </br>
 <div id="CDN_Link_Generator-links"> </div>
@@ -236,9 +236,9 @@ label {
         return returnStr;
     }
 </script>
-## Linux Server
+## Linux 服务器
 
-CoreClr/C# Module
+CoreClr/C# 模块
 > [!div class="nohljsln"]
 >```yaml
 >https://cdn.alt-mp.com/coreclr-module/${BRANCH}/x64_linux/update.json
@@ -247,7 +247,7 @@ CoreClr/C# Module
 >https://cdn.alt-mp.com/coreclr-module/${BRANCH}/x64_linux/modules/libcsharp-module.so
 >```
 
-JS Module
+JS 模块
 > [!div class="nohljsln"]
 >```yaml
 >https://cdn.alt-mp.com/js-module/${BRANCH}/x64_linux/update.json
@@ -255,21 +255,21 @@ JS Module
 >https://cdn.alt-mp.com/js-module/${BRANCH}/x64_linux/modules/js-module/libnode.so.108
 >```
 
-JS Bytecode Module
+JS Bytecode 字节码 模块
 > [!div class="nohljsln"]
 >```yaml
 >https://cdn.alt-mp.com/js-bytecode-module/${BRANCH}/x64_linux/update.json
 >https://cdn.alt-mp.com/js-bytecode-module/${BRANCH}/x64_linux/modules/libjs-bytecode-module.so
 >```
 
-Voice Server
+语音服务器
 > [!div class="nohljsln"]
 >```yaml
 >https://cdn.alt-mp.com/voice-server/${BRANCH}/x64_linux/update.json
 >https://cdn.alt-mp.com/voice-server/${BRANCH}/x64_linux/altv-voice-server
 >```
 
-Server
+服务端
 > [!div class="nohljsln"]
 >```yaml
 >https://cdn.alt-mp.com/server/${BRANCH}/x64_linux/update.json
@@ -282,14 +282,14 @@ Server
 >https://cdn.alt-mp.com/data/${BRANCH}/data/rpfdata.bin
 >```
 
-Other Stuff
+其他内容
 > [!div class="nohljsln"]
 >```yaml
 >https://cdn.alt-mp.com/others/start.sh
 >https://cdn.alt-mp.com/samples/resources.zip
 >```
 
-## Windows Server
+## Windows 服务器
 
 CoreClr/C# Module
 > [!div class="nohljsln"]
@@ -300,7 +300,7 @@ CoreClr/C# Module
 >https://cdn.alt-mp.com/coreclr-module/${BRANCH}/x64_win32/modules/csharp-module.dll
 >```
 
-JS Module
+JS 模块
 > [!div class="nohljsln"]
 >```yaml
 >https://cdn.alt-mp.com/js-module/${BRANCH}/x64_win32/update.json
@@ -308,21 +308,21 @@ JS Module
 >https://cdn.alt-mp.com/js-module/${BRANCH}/x64_win32/modules/js-module/libnode.dll
 >```
 
-JS Bytecode Module
+JS Bytecode 字节码 模块
 > [!div class="nohljsln"]
 >```yaml
 >https://cdn.alt-mp.com/js-bytecode-module/${BRANCH}/x64_win32/update.json
 >https://cdn.alt-mp.com/js-bytecode-module/${BRANCH}/x64_win32/modules/js-bytecode-module.dll
 >```
 
-Voice Server
+语音服务器
 > [!div class="nohljsln"]
 >```yaml
 >https://cdn.alt-mp.com/voice-server/${BRANCH}/x64_win32/update.json
 >https://cdn.alt-mp.com/voice-server/${BRANCH}/x64_win32/altv-voice-server.exe
 >```
 
-Server
+服务端
 > [!div class="nohljsln"]
 >```yaml
 >https://cdn.alt-mp.com/server/${BRANCH}/x64_win32/update.json
@@ -335,14 +335,14 @@ Server
 >https://cdn.alt-mp.com/data/${BRANCH}/data/rpfdata.bin
 >```
 
-Other Stuff
+其他内容
 > [!div class="nohljsln"]
 >```yaml
 >https://cdn.alt-mp.com/others/start.sh
 >https://cdn.alt-mp.com/samples/resources.zip
 >```
 
-## Client
+## 客户端
 > [!div class="nohljsln"]
 >```yaml
 >https://cdn.alt-mp.com/client/${BRANCH}/x64_win32/update.json

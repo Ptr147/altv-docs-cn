@@ -1,4 +1,4 @@
-- name: Client
+- name: 客户端
   href: client.md
-- name: Server
+- name: 服务端
   href: server.md
