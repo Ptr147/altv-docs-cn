@@ -1,51 +1,51 @@
-﻿# External voice server
+﻿# 外部语音服务器  
 
-Depending on the number of players, it may be necessary to run the voice server on an external server, for example, to route network traffic to another network card or to use dedicated resources for the voice server.
+根据玩家数量,可能需要在外部服务器上运行语音服务器,例如,将网络流量路由到另一个网络卡或为语音服务器使用专用资源。  
 
-This article deals with the setup of the external voice server and the connection to the alt:V server.
+本文介绍外部语音服务器的设置和与alt:V服务器的连接。
 
-## Setup external voice server
+## 设置外部语音服务器  
 
-First of all, the voice server must be downloaded, the links for this can be found in the [CDN](https://docs.altv.mp/articles/cdn_links.html) article under the topics Windows Server and Linux Server.
+首先,必须下载语音服务器,可以在[CDN](https://docs.altv.mp/articles/cdn_links.html)文章的Windows Server和Linux Server主题下找到链接。  
 
-After the download, the voice server can be placed on any server (it can also be the same device as the alt:V server).
+下载后,语音服务器可以放置在任何服务器上(它也可以是alt:V服务器的同一设备)。  
 
-To configure it create a file named voice.toml, add the following content and adjust it accordingly:
+要配置它,创建一个名为voice.toml的文件,添加以下内容并相应地调整它:  
 
 ```toml
-# IP address of the external voice server used to receive the alt:V servers voice connection
-# Can be a private ip or 0.0.0.0 to accept all
-host = '0.0.0.0'
-# Port used in combination with the ip above
-port = 7798
-# IP address which is used to receive the clients connections
-# Should be a public ip or 0.0.0.0 to accept all
-playerHost = '0.0.0.0'
-# Port used for the clients connections
-playerPort = 7799
-# Secret shared between the alt:V server and the external voice server
+# 用于接收alt:V服务器语音连接的外部语音服务器的IP地址  
+# 可以是专用IP或0.0.0.0以接受所有连接  
+host = '0.0.0.0'  
+# 与上述IP一起使用的端口  
+port = 7798  
+# 用于接收客户端连接的IP地址  
+# 应为公共IP或0.0.0.0以接受所有连接  
+playerHost = '0.0.0.0'  
+# 客户端连接使用的端口  
+playerPort = 7799  
+# alt:V服务器与外部语音服务器共享的密钥  
 secret = 1234567890
 ```
 
-Now you only have to start the voice server and continue with the integration of the alt:V server.
+现在您只需启动语音服务器并继续集成 alt:V 服务器。
 
-## Integrate external voice server
+## 集成外部语音服务器
 
-To integrate the alt:V server only small adjustments to the server.toml are necessary:
+要集成 alt:V 服务器,只需对 server.toml 进行少量调整:
 
 ```toml
-[voice]
-# The bitrate of the voice server
-bitrate = 64000
-# The secret for the external server (only needed when using externalHost)
-# The secret must consist of numeric values only
-externalSecret = 1234567890
-# The external host address (leave 127.0.0.1, if voice-server is on same machine)
-externalHost = "127.0.0.1"
-# The external host port
-externalPort = 7798
-# The external host public address (should be the ip address of your server, not localhost!)
-externalPublicHost = "xx.xx.xx.xx"
-# The external host public port
+[voice]  
+# 语音服务器的比特率  
+bitrate = 64000  
+# 外部服务器的密钥(仅在使用externalHost时需要)  
+# 密钥必须仅由数字组成  
+externalSecret = 1234567890  
+# 外部主机地址(如果语音服务器在同一台机器上,请留空127.0.0.1)  
+externalHost = "127.0.0.1"  
+# 外部主机端口  
+externalPort = 7798  
+# 外部主机公共地址(应为您的服务器IP地址,而不是localhost!)  
+externalPublicHost = "xx.xx.xx.xx"  
+# 外部主机公共端口  
 externalPublicPort = 7799
 ```
