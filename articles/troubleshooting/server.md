@@ -1,34 +1,34 @@
-# Troubleshoot Server
+# 排除服务器故障   
 
-Sometimes when you are running a server, some issues can occur. Most of these issues are repetitive and easy to solve. Therefore, this article collects the most common errors and their solutions.
+有时候在运行服务器时,会出现一些问题。大多数这些问题都是重复的并且易于解决。因此,本文收集了最常见的错误及其解决方案。
 
-## Known issues & solutions
+## 已知问题和解决方案  
 
-#### Warning: To load an ES module, set "type": "module" in the package.json or use the .mjs extension.
+#### 警告:要加载ES模块,请在package.json中设置 `"type":"module"` 或使用.mjs扩展名。
 
-This issue is caused by missing the `type` configuration inside your package.json. To solve this problem you need to add `"type":"module"` in your package.json
+此问题是由package.json中缺少 `type` 配置引起的。要解决此问题,您需要在package.json中添加 `"type":"module"` 。  
 
-#### Failed to load "js-module.dll" Win32 error: 127 (7f)
+#### 无法加载"js-module.dll" Win32 错误:127 (7f)
 
-If you head into your alt:V server directory, you will most likely find a `libnode.dll` file. In order to solve this issue, you need to delete this file.
+如果您进入alt:V服务器目录,您很可能会找到一个 `libnode.dll` 文件。为了解决此问题,您需要删除此文件。
 
-#### Module outdated, module uses SDK vXX, server requires SDK vXX
+#### 模块过时,模块使用SDK vXX,服务器需要SDK vXX
 
-You will sometimes get this error especially if there is a new release. Usually, it is enough to update your server by downloading the latest alt:V server files which include the latest `csharp-module.dll` or `js-module.dll`.
+有时候您会遇到此错误,特别是如果有新版本发布。通常,更新您的服务器以下载最新的alt:V服务器文件(包括最新的 `csharp-module.dll` 或 `js-module.dll`)就足够了。
 
-#### Error while reading server.toml on line xx, column. Reason: invalid token
+#### 读取server.toml第xx行,第xx列时出错。原因:无效标记  
 
-This issue mostly occurs when strings are not put in double quotes. For example, the URL of your website is not put in double quotes inside the `server.toml` will cause this issue. To find the issue inside your`server.toml` you should pay attention to the error message which gives you the exact line.
+此问题通常发生在字符串未放在双引号内时。例如,如果您的网站URL未在 `server.toml` 内的双引号内,将导致此问题。要在您的 `server.toml` 内找到问题,您应该注意错误消息,它会给您确切的行号。  
 
-#### Master server connect failed. Invalid token
+#### 主服务器连接失败。无效令牌  
 
-Inside your `server.toml` you can find a configuration variable called `announce`. If this is set to `true`, you will need a **valid** token. Therefore, you need to request a master list token from the alt:V Master-Bot. To receive a token, you need to send a single message with the content "token" to `Master-Bot#3667` on discord. To obtain a token you have to meet one of the following requirements:
+在您的 `server.toml` 中,您可以找到一个名为 `announce` 的配置变量。如果此变量设置为 `true`, 您将需要一个 **有效** 的令牌。因此,您需要从alt:V主机列表机器人请求主机列表令牌。要接收令牌,您需要向Discord上的 `Master-Bot#3667` 发送一条内容为"token"的消息。要获得令牌,您必须满足以下要求之一:
 
-1. You can obtain a token for broadcasting to the master list by waiting 30 days to generate one.
-2. You can obtain a token immediately by subscribing as a Bronze Patreon to generate your token. If you would like to go down this route you can visit https://www.patreon.com/altVMP to subscribe.
+1. 您可以通过等待30天生成一个令牌来获得广播到主机列表的令牌。  
+2. 您可以立即通过订阅铜牌赞助者生成令牌。如果您想选择这条路线,可以访问https://www.patreon.com/altVMP订阅。  
 
-Keep in mind that you usually do not need a master list announcement while you are in the development stage. You can set the `announce` flag to `false` inside your `server.toml`.
+请记住,在开发阶段,您通常不需要主机列表公告。您可以在 `server.toml` 内将 `announce`标 志设置为 `false` 。  
 
-#### Unhandled Exception: Received an unhandled exception from: ...
+#### 未处理异常:收到来自...的未处理异常  
 
-When you use C# on your server-side, you will encounter this problem sometimes. You can easily solve this problem by updating the alt:V NuGet packages and rebuilding your resource.
+当您在服务器端使用C#时,您会有时遇到此问题。您可以轻松解决此问题,方法是更新alt:V NuGet包并重新生成您的资源。
