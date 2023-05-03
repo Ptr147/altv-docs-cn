@@ -1,32 +1,32 @@
-# Master list API
+# 主列表API   
 
-The master list api allow you to fetch data from the alt:V master list service.
+主列表API允许您从alt:V主列表服务获取数据。
 
-## Information
+## 信息  
 
-* GET only
-* Return JSON Object
-* If abused you can be banned from using the API
+* 仅GET  
+* 返回JSON对象  
+* 如果滥用,您可能会被禁止使用API  
 
-## API Links
+## API链接  
 
-|                   URL                      |                                        Description                                                      |
-| :----------------------------------------: | :-----------------------------------------------------------------------------------------------------: |
-| https://api.alt-mp.com/servers                | Statistics - Player Count across all servers & The amount of servers online                             |
-| https://api.alt-mp.com/servers/list           | Servers - All information known about all servers (Name, Description, IP, Language, Website, Etc.)      |
-| https://api.alt-mp.com/server/MASTERLIST_ID   | Specific Server - Filters server list for a specific one. Uses "id" which is unique to the server token |
-| https://api.alt-mp.com/avg/MASTERLIST_ID/TIME | Averages - Returns averages data about the specified server (TIME = 1d, 7d, 31d)                        |
-| https://api.alt-mp.com/max/MASTERLIST_ID/TIME | Maximum - Returns maximum data about the specified server (TIME = 1d, 7d, 31d)                          |
+|                   URL                      |                                    描述                                                      |
+| :----------------------------------------: | :-----------------------------------------------------------------------------------------: |
+| https://api.alt-mp.com/servers               | 统计信息 - 所有服务器上的玩家数量 & 在线服务器数量                             |
+| https://api.alt-mp.com/servers/list          | 服务器 - 有关所有服务器的所有已知信息(名称、描述、IP、语言、网站等)      |  
+| https://api.alt-mp.com/server/MASTERLIST_ID  | 特定服务器 - 过滤服务器列表以选择一个特定服务器。使用服务器令牌唯一的"id" |
+| https://api.alt-mp.com/avg/MASTERLIST_ID/TIME| 平均值 - 返回有关指定服务器的平均数据(TIME = 1d, 7d, 31d)                    |
+| https://api.alt-mp.com/max/MASTERLIST_ID/TIME| 最大值 - 返回有关指定服务器的最大数据(TIME = 1d, 7d, 31d)                      |
 
-## Response example
-### Statistics
+## 响应示例  
+### 统计信息
 
 ```json
 { "ServersCount": 64, "playersCount": 1582 }
 ```
 
-### Server list
-It's a fragment of API's response.
+### 服务器列表
+这是一个API响应的片段。
 
 ```json
 [
@@ -63,7 +63,7 @@ It's a fragment of API's response.
 ]
 ```
 
-### Specific server
+### 特定服务器
 ```json
 {
     "active":true,
@@ -101,7 +101,7 @@ It's a fragment of API's response.
 }
 ```
 
-### Average / Maximum
+### 平均值/最大值
 ```json
 [
     { "t":1612562230,"c":4 },
@@ -110,30 +110,30 @@ It's a fragment of API's response.
 ]
 ```
 
-Description: t = Timestamp in UTC, c = Player Count.
+描述:t = UTC时间戳,c = 玩家数量。
 
-# altstats.net - alt:V Stats API (Unofficial)
+# altstats.net - alt:V Stats API(非官方)
 
-altstats.net - alt:V Stats is a alternative server list, developed and supported by members of the altMP Team. It has additional statistics about servers like player count for the last 24 hours, 7 days or month and you have a server specific API.
+altstats.net - alt:V Stats 是一个替代的服务器列表,由 altMP 团队的成员开发和支持。它具有有关服务器的附加统计信息,例如过去24小时、7天或一个月的玩家数量,并且您可以使用服务器特定的API。 
 
-Features like showing the player count for the last month are premium features, you need to pay for them to enable them. 
-## Information
+显示过去一个月的玩家数量等功能属于付费功能,您需要付费才能启用它们。  
+## 信息
 
-* GET only
-* Return JSON Object
-* If abused you can be banned from using the API
-* API can change anytime without notice
+* 仅GET
+* 返回JSON对象
+* 如果滥用,您可能会被禁止使用API 
+* API可以随时更改而不另行通知
 
-## API Links
+## API 链接
 
-|                     URL                         |                           Description                           |
+|                     URL                         |                           描述                           |
 | :---------------------------------------------: | :-------------------------------------------------------------: |
-| https://api.altstats.net/api/v1/master          | Count - Shows the server and player count for the last 24 hours |
-| https://api.altstats.net/api/v1/server          | Servers - Basic information about all known servers             |
-| https://api.altstats.net/api/v1/server/serverID | Specific Server - Lists you all information about a server      |
+| https://api.altstats.net/api/v1/master          | 数量 - 显示过去24小时服务器和玩家数量 |
+| https://api.altstats.net/api/v1/server          | 服务器 - 有关所有已知服务器的基本信息             |
+| https://api.altstats.net/api/v1/server/serverID | 特定服务器 - 列出有关服务器的所有信息      |
 
-## Response example
-### Count
+##  响应示例
+### 数量
 ```json
 [
   {
@@ -152,7 +152,7 @@ Features like showing the player count for the last month are premium features, 
 ]
 ```
 
-### Servers
+### 服务器列表
 ```json
 [
   {
@@ -185,7 +185,7 @@ Features like showing the player count for the last month are premium features, 
 ]
 ```
 
-### Specific server
+### 特定 服务器
 ```json
 {
   "Id": 330,
