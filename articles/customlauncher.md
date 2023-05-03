@@ -1,109 +1,109 @@
-# Introduction
+# 介绍  
 
 > [!CAUTION]
-> Custom launchers that are required to connect to the server are only allowed if they are fully open source and the server is not listed on the masterlist.
+> 仅允许完全开放源代码的定制启动器连接到服务器,并且服务器不会列入主服务器列表。
 
-As an alternative to the custom launcher, it is possible to obtain a branded launcher.
+作为定制启动器的替代方案,可以获得品牌启动器。  
 
-The branded launcher is available from the Patreon "Diamond" tier or higher and features several server-specific displays such as an RSS feed, launcher and UI background, logo, primary color, and server name.\
-In order for a user to activate this branding, a "Apply server skin" checkbox is shown when connecting to the server, which is enabled by default.
+品牌启动器可从Patreon"钻石"层或更高层获得,具有多个服务器特定显示,例如RSS提要、启动器和UI背景、徽标、主要颜色和服务器名称。\
+为了激活此品牌,连接到服务器时会显示"应用服务器外观"复选框,默认情况下已启用。  
 
-This article explains what information is required and how to request it.
+本文介绍所需的信息以及如何请求它。
 
-# Samples
+# 示例  
 
-You can check out the following examples for some of the available customizations:
+您可以查看以下示例,了解一些可用定制项:  
 
-- [Launcher background](~/altv-docs-assets/altv-docs-gta/images/customlauncher/launcher_splash.png)
-- [Interface background and RSS feed](~/altv-docs-assets/altv-docs-gta/images/customlauncher/user_interface.png)
-- [Loading screen](~/altv-docs-assets/altv-docs-gta/images/customlauncher/loading_screen.png)
-- [Activate the skin](~/altv-docs-assets/altv-docs-gta/images/customlauncher/apply_skin.png)
+- [启动器背景](~/altv-docs-assets/altv-docs-gta/images/customlauncher/launcher_splash.png)
+- [界面背景和RSS提要](~/altv-docs-assets/altv-docs-gta/images/customlauncher/user_interface.png)  
+- [加载屏幕](~/altv-docs-assets/altv-docs-gta/images/customlauncher/loading_screen.png)
+- [激活外观](~/altv-docs-assets/altv-docs-gta/images/customlauncher/apply_skin.png)  
 
-# Requesting a launcher
+# 请求启动器  
 
-To request a launcher, you must have an active Patreon membership at the "Diamond" level or higher.
+要请求启动器,您必须有活动的Patreon会员资格,级别为"钻石"或更高级别。  
 
-The following data can be included optionally to customize the interface:
-- **All images must be in PNG format**
-- A launcher background with a resolution of 300x400 [[Example](~/altv-docs-assets/altv-docs-gta/images/customlauncher/launcher_splash.png)]
-- A logo with a resolution of 128x128 [[Example](~/altv-docs-assets/altv-docs-gta/images/customlauncher/user_interface.png)]
-- A UI background with a resolution of 1920x1080 or 3840x2160 [[Example](~/altv-docs-assets/altv-docs-gta/images/customlauncher/loading_screen.png)]
-- A color to replace the primary color of the interface [[Example 1](~/altv-docs-assets/altv-docs-gta/images/customlauncher/user_interface.png)] [[Example 2](~/altv-docs-assets/altv-docs-gta/images/customlauncher/color_customization.png)]
-- The link to an RSS feed. The exact format of the RSS feed is covered in the following topics. [[Example](~/altv-docs-assets/altv-docs-gta/images/customlauncher/user_interface.png)]
+可选地可以包括以下数据来自定义界面:  
+- **所有图像必须为PNG格式**  
+- 启动器背景,分辨率为300x400 [[示例](~/altv-docs-assets/altv-docs-gta/images/customlauncher/launcher_splash.png)]  
+- 徽标,分辨率为128x128 [[示例](~/altv-docs-assets/altv-docs-gta/images/customlauncher/user_interface.png)]  
+- UI背景,分辨率为1920x1080或3840x2160 [[示例](~/altv-docs-assets/altv-docs-gta/images/customlauncher/loading_screen.png)]  
+- 替换界面主要颜色的颜色 [[示例1](~/altv-docs-assets/altv-docs-gta/images/customlauncher/user_interface.png)] [[示例2](~/altv-docs-assets/altv-docs-gta/images/customlauncher/color_customization.png)]  
+- RSS提要的链接。RSS提要的确切格式在后续主题中介绍。[[示例](~/altv-docs-assets/altv-docs-gta/images/customlauncher/user_interface.png)]  
 
-Once you have fulfilled all requirements and prepared the necessary media, join our [Discord server](https://discord.altv.mp/) and contact a member of the Public Relations team.
+准备好所有必要条件和必要媒体后,请加入我们的[Discord服务器](https://discord.altv.mp/)并联系公共关系团队的成员。
 
-# RSS Feed
+# RSS提要  
 
-## Title
+## 标题  
 
-The title of the RSS feed is visible above the feed. If the 'title' property of the RSS feed is an empty string, the translation of 'Latest news' in the users language will be used instead.
+RSS提要的标题显示在提要上方。如果RSS提要的'title'属性是一个空字符串,则会使用用户语言的'最新消息'翻译代替。
 
-## Item Properties
+## 项目属性  
 
-The following properties of the RSS feed entries are processed by the launcher:
+启动器会处理RSS提要条目的以下属性:  
 
-| Property    | Required | Description                                                                                                            |
+| 属性     | 必需 | 描述                                                                                     |
 |-------------|----------|------------------------------------------------------------------------------------------------------------------------|
-| title       | No       | Title of the post, displayed at the beginning of the post                                                              |
-| link        | No       | Opens in the browser when the user clicks on the post                                                                  |
-| pubDate     | Yes      | Date of publication of the post. Displayed at the end in the user's language-specific formatting                       |
-| description | Yes      | Content of the post. Use of various HTML elements is allowed. The allowed elements are covered in the following topic. |
-| dc:creator  | No       | Creator of the post. Allows the use of HTML.                                                                           |
+| title       | 否       | 帖子的标题,显示在帖子开头                                                              |  
+| link        | 否       | 用户单击帖子时在浏览器中打开                                                                |
+| pubDate     | 是      | 帖子发布日期。以用户语言特定的格式显示在末尾                       |
+| description | 是      | 帖子内容。允许使用各种HTML元素。允许的元素在后续主题中介绍。 |
+| dc:creator  | 否       | 帖子的创建者。允许使用HTML。           |
 
-## HTML usage
+## HTML 使用
 
-The following HTML elements are allowed and can be used in the RSS feed:\
+允许在RSS提要中使用以下HTML元素:\
 address, article, aside, footer, header, h1, h2, h3, h4, h5, h6, hgroup, main, nav, section, blockquote, dd, div, dl, dt, figcaption, figure, hr, li, main, ol, p, pre, ul, a, abbr, b, bdi, bdo, br, cite, code, data, dfn, em, i, kbd, mark, q, rb, rp, rt, rtc, ruby, s, samp, small, span, strong, sub, sup, time, u, var, wbr, caption, col, colgroup, table, tbody, td, tfoot, th, thead, tr, img, del
 
-## Special elements
+## 特殊 elements
 
 > [!TIP]
-> Unless otherwise specified, the display styles of the elements listed below follow the display style of Discord.
+> 除非另有规定，否则下面列出的元素的显示样式将遵循 Discord 的显示样式。
 
-### Spoiler
+### 隐藏剧透(Spoiler)
 
 ```html
 <span data-spoiler>content</span>
 ```
 
-Displays a spoiler that can be revealed by the user clicking on it.
+显示可以通过用户点击才能显示的剧透。
 
-### Localized strings
+### 本地化字符串
 
 ```html
-<!-- Localized string without arguments -->
+<!-- 无参数的本地化字符串 -->
 <span data-localized>LOCALIZATION_KEY</span>
 
-<!-- Localized string with arguments -->
+<!-- 带参数的本地化字符串 -->
 <span data-localized="localization argument">LOCALIZATION_KEY</span>
 ```
 
-A list of translated strings can be found in the [altv-locales](https://github.com/altmp/altv-locales/tree/master) repository.
+翻译后的字符串列表可以在[altv-locales](https://github.com/altmp/altv-locales/tree/master)存储库中找到。 
 
-The usage of the localized strings is only possible in the properties `description` and `dc:creator`.
+本地化字符串的用法仅限于 `description` 和 `dc:creator` 属性。
 
-### Timestamps
+### 时间戳
 
 ```html
 <span data-timestamp="F">1675455031</span>
 ```
 
-The timestamp behaves like a timestamp in Discord and displays the respective time in the user's timezone.\
-The content of the span is a Unix timestamp and the possible [formats](https://discord.com/developers/docs/reference#message-formatting-timestamp-styles) are based on Discords syntax.
+时间戳的行为与Discord中的时间戳相似,并在用户的时区显示相应的时间。\  
+span的内容是Unix时间戳,可能的[格式](https://discord.com/developers/docs/reference#message-formatting-timestamp-styles)基于Discord的语法。  
 
-If no other format is specified, the "F" format is used by default.
+如果未指定其他格式,则默认使用 "F" 格式。
 
-### Mentions
+### 提及
 
 ```html
 <span data-mention="255, 0, 0">@zziger</span>
 ```
 
-Displays a mention. As the value of the attribute, a color in RGB syntax separated by a comma can be specified.\
-If no value is specified, Discord's default mention color is used.
+显示提示。作为属性的值，可以指定用逗号分隔的RGB语法中的颜色\
+如果未指定任何值，则使用Discord的默认提及颜色。
 
-### Images
+### 图片
 
 #### Emoji
 
@@ -111,8 +111,8 @@ If no value is specified, Discord's default mention color is used.
 <img data-emoji src="https://emoji/icon/url.png" alt="emojiname">
 ```
 
-Displays an image as a small inline element (1.375em height).\
-Allowed in the description and dc:creator properties.
+将图像显示为一个小的内联元素（1.375em高）\
+在描述和 dc:creater 属性中允许。
 
 #### Image row
 
@@ -124,17 +124,17 @@ Allowed in the description and dc:creator properties.
 </span>
 ```
 
-Displays the given images in a horizontally scrollable list. The scrollbar is only shown when the width exceeds the possible display. Recommended for example for galleries.
+在水平滚动列表中显示给定的图像。只有当宽度超过可能的显示时，才会显示滚动条。例如，建议用于画廊。
 
-### Quote
+### 引用(Quote)
 
 ```html
 <blockquote>quote content</blockquote>
 ```
 
-Displays the specified content as a quote.
+将指定的内容显示为引用。
 
-### Code
+### 代码(Code)
 
 #### Inline
 
@@ -142,9 +142,9 @@ Displays the specified content as a quote.
 <code>Inline code</code>
 ```
 
-Displays the specified text as code without line breaks.
+将指定的文本显示为不带换行符的代码。
 
-#### Block
+#### 代码块(Block)
 
 ```html
 <pre>
