@@ -1,14 +1,14 @@
-# How to Contribute
+# 如何贡献
 
-This document includes a set of guidelines for contributing to alt:V documentation.
+本文档包含为alt:V文档做出贡献的一组指南。  
 
-## Documentation structure
+## 文档结构
 
-Structure consists of one or more repositories linked to the core repository (you're currently in it).
+结构由一个或多个链接到核心仓库的仓库组成(您当前所在的仓库)。
 
-Core repository is responsible for including linked repositories in documentation generation process. We're using DocFx generator for that task.
+核心仓库负责在文档生成过程中包括链接的存储库。我们使用DocFx生成器完成此任务。
 
-Each linked repository have directory structure that looks similar to this:
+每个链接的仓库都有类似于此的目录结构:
 ```
 └───docs
     │   build.cmd
@@ -21,113 +21,114 @@ Each linked repository have directory structure that looks similar to this:
     └───articles
 ```
 
-`docfx.json` is the main configuration file, used locally for testing purposes. If you wish to learn more about its format, refer to [this](https://dotnet.github.io/docfx/tutorial/docfx.exe_user_manual.html#3-docfxjson-format).
+`docfx.json` 是主要的配置文件,用于本地测试目的。如果您想了解更多关于其格式的信息,请参阅[此处](https://dotnet.github.io/docfx/tutorial/docfx.exe_user_manual.html#3-docfxjson-format)。  
 
-`build.cmd` and `build.ps1` are scripts written in PowerShell to test documentation locally before publishing changes to core repository. Later we'll explain how they work and how to use them.
+`build.cmd`和`build.ps1`是用PowerShell编写的脚本,用于在发布更改到核心存储库之前本地测试文档。稍后我们将解释它们的工作原理以及如何使用它们。
 
-`index.md` and `toc.yml` are main Conceptual documents that are required (with some exceptions) in documentation.
+`index.md`和`toc.yml`是所需的主要概念文档(有些例外情况)。  
 
-`toc.yml` file (Table of Contents or ToC) is YAML document that specifies documentation structure in current directory and is responsible for linking other subdirectories for ease of navigation. If you wish to learn more about its format, refer to this [article](https://dotnet.github.io/docfx/tutorial/docfx.exe_user_manual.html#23-generate-documentation-command-docfx-build).
+`toc.yml`文件(目录或目录)是YAML文档,它指定当前目录中的文档结构,并负责链接其他子目录以方便导航。如果您想了解更多关于其格式的信息,请参阅此[文章](https://dotnet.github.io/docfx/tutorial/docfx.exe_user_manual.html#23-generate-documentation-command-docfx-build)。
 
-`index.md` file is Markdown document that appear in every directory and serves as a starting page.
+`index.md`文件是Markdown文档,出现在每个目录中,充当起始页面。  
 
-`api` contains API documentation, which is mostly generated automatically from source code of the project and later incorporated by documentation generator. When generated automatically, we don't edit these files directly, but we use files called overwrite documents, which allows us to overwrite files without editing source at all.
+`api` 包含API文档,这些文档大部分是从项目的源代码自动生成的,然后由文档生成器合并。当自动生成时,我们不直接编辑这些文件,而是使用称为覆盖文档的文件,这允许我们覆盖文件而无需编辑源。  
 
-`articles` contains Conceptual documentation, which will be the place where you'll spend the most of your time.
-In the opposition to `api` folder, files there are created manually by contributors.
+`articles` 包含概念文档,这将是您花费大部分时间的地方。  
 
-## Linked repositories
+与`api`文件夹相反,该文件夹中的文件是由贡献者手动创建的。
 
-We include community created modules in our documentation and if you want to contribute to language specific documentation, switch to repository posted below:
+## 链接的存储库
 
-| Language | Repository
+我们在文档中包括社区创建的模块,如果您想为特定语言的文档做出贡献,请切换到下面发布的存储库:
+
+| 语言 | 存储库  
 | ---      | ---
 | JS       | [](https://github.com/altmp/altv-types)
 | C#       | [](https://github.com/FabianTerhorst/coreclr-module)
 
-## Build tools
+## 构建工具  
 
-As mentioned previously, every linked repository should contain build tools to easily test and verify your work.
+如前所述,每个链接的存储库都应包含构建工具来轻松测试和验证您的工作。  
 
-As of now, we're only providing ways to do that on Windows, where PowerShell is installed.
+目前,我们只提供在安装了PowerShell的Windows上做这件事的方法。  
 
-> [!WARNING]
-> Other operating systems are not supported by us and by current documentation generator (although it might change in DocFx v3).
+> [!警告]
+> 我们和当前的文档生成器(尽管在DocFx v3中可能会改变)不支持其他操作系统。
 
-Actual code is defined in `build.ps1`, where `build.cmd` serves as wrapper (by default in Windows Explorer it's not allowed to execute PowerShell scripts by simply opening them).
+实际代码在`build.ps1`中定义,其中`build.cmd`用作包装程序(默认情况下,在Windows资源管理器中不允许通过简单地打开它们来执行PowerShell脚本)。  
 
-Command-line arguments:
+命令行参数:
 
-| Argument        | Description                                       | Usage
-| ---             | ---                                               | ---
-| `port `         | Changes port used by DocFx to host website on.    | `./build.ps1 -port 80`
-| `cleanMetadata` | All generated output will be removed on each run. | `./build.ps1 -cleanMetadata`
-| `cleanOnly`     | All dependencies will be removed only.            | `./build.ps1 -cleanOnly`
+| 参数          | 描述                                           | 用法  
+| ---             | ---                                         | ---
+| `port `         | 更改DocFx用于托管网站的端口。                 | `./build.ps1 -port 80`
+| `cleanMetadata` | 每次运行都会删除所有生成的输出。               | `./build.ps1 -cleanMetadata`
+| `cleanOnly`     | 只删除依赖项。                                | `./build.ps1 -cleanOnly`
 
-## Initial setup
+## 初始设置
 
-To start adventure with contribution, you need programs installed such as Git, Node with npm package manager and if you wish to work with C# documentation, Visual Studio with ".NET desktop development" workload or Visual Studio Build Tools with ".NET Desktop build tools" workload.
+要开始贡献的冒险,您需要安装程序,例如Git、带有npm包管理器的Node,如果您想使用C#文档,请使用具有".NET桌面开发"工作负载的Visual Studio或带有".NET桌面生成工具"工作负载的Visual Studio生成工具。  
 
-1. Fork the repository - https://github.com/altmp/altv-docs/fork
-1. Open a terminal on Windows.
-1. Move to the directory that you want to work in.
-1. Clone your repository, replace USER with your GitHub username:
+1. 复刻存储库 - https://github.com/altmp/altv-docs/fork
+1. 在Windows上打开终端。
+1. 转到您要工作的目录。
+1. 克隆您的存储库,用您的GitHub用户名替换USER:
     ```bash
     git clone https://github.com/USER/altv-docs
     ```
-1. Add the altmp/altv-docs repo as a remote repository
+1. 将 altmp/altv-docs 存储库添加为远程存储库 
     ```bash
     git remote add upstream https://github.com/altmp/altv-docs
     ```
-1. Switch to the `docs` directory if there's one in your forked repository. It should have files as described in documentation structure.
+1. 如果您的复刻仓库中有 `docs` 目录,请切换到该目录。其中应包含文档结构中描述的文件。  
 
-## Generating and testing
+## 生成和测试
 
-When `build.ps1` script is executed, first we download dependencies such as DocFx tool, plugins, templates or linked repositories etc.
-
-> [!WARNING]
-> Keep in mind that currently we don't automatically update dependencies, but manually deleting them should trigger redownload.
-
-Next thing is project metadata generation, which is needed for API documentation.
-
-Lastly, DocFx build is executed and generated site will be available on `localhost:8080` by default.
-
-To stop running script or update website with newest changes, simply terminate running script by pressing key combination `Ctrl+C`. After that, you can execute script again if needed.
-
-If everything works to this moment, you can now start contributing.
-
-> [!TIP]
-> It's highly recommended that you should work on separate branch rather than `master`, so you can easily incorporate changes when repository gets updated.
-
-## Creating articles
-
-Before you start creating/editing files, you should think about what you want to add first.
+执行`build.ps1`脚本时,首先我们下载依赖项,例如DocFx工具、插件、模板或链接的存储库等。
 
 > [!WARNING]
-> You can't write articles about GTA:V stuff, like modding, data etc. That stuff belongs to our wiki website.
+> 请记住,目前我们不会自动更新依赖项,但手动删除它们应该会触发重新下载。
 
-Title should be as short as possible, understandable and preferably catchy.
+下一步是生成项目元数据,这对API文档很有必要。  
 
-Another thing to do is to choose proper category for your article. You should find available ones in ``articles/`` directory, they look like folders.
+最后,执行DocFx生成,生成的站点默认情况下在 `localhost:8080` 可用。  
 
-Now, if you plan on making only single article, you can go to step [Single article](#single-article).
-If not, you've to create category for them in case you haven't found one. Follow instructions defined in step [Article series](#article-series).
+要停止运行脚本或使用最新更改更新网站,只需通过按`Ctrl+C`组合键终止运行脚本。之后,如果需要,可以再次执行脚本。  
 
-### Article series
-
-Just like before, you've to think of the name for your category and it also should be as short as possible, understandable and preferably catchy (also it can't be the same as article name).
-
-When you got one, create new folder with that name in ``articles/`` directory.
+如果到目前为止一切正常工作,您现在可以开始贡献。
 
 > [!TIP]
-> Remember, name should be lowercase, alphanumeric and spaces should be replaced with hyphen.
+> 强烈建议您应该在单独的分支上工作，而不是在 `master`上工作，这样您就可以在存储库更新时轻松地合并更改。
 
-You can go inside that folder and create two files there named ``index.md`` and ``toc.yml``.
-These files are required, though ``index.md`` can stay empty for now.
+## 创建文档
 
-Before we'll focus on making actual articles, we've to make your category visible in Table of Contents.
+在开始 创建/编辑 文件之前,您应该首先考虑要添加什么。  
 
-Let's open ``articles/toc.yml`` file, which now looks similar to this:
+> [!WARNING]
+> 您不能编写与GTA:V相关的文档,如 modding、数据等。这些内容属于我们的wiki网站。  
+
+标题应尽可能简短、易于理解且最好有吸引力。  
+
+要做的另一件事是为文档选择适当的类别。您应该能在 ``articles/`` 目录中找到可用类别,它们看起来像文件夹。
+
+现在,如果您计划只制作一篇文档,您可以转到步骤[单篇文档](#single-article)。  
+如果不是,您必须为它们创建类别(如果您没有找到一个类别)。遵循步骤[系列文档](#article-series)中定义的说明。  
+
+### 系列文档
+
+和之前一样,您必须为类别想出一个名称,它也应尽可能简短、易于理解且最好有吸引力(它也不能与文档名称相同)。  
+
+当您有一个名称时,在 ``articles/`` 目录中创建一个带有该名称的新文件夹。  
+
+> [!TIP]
+> 请记住,名称应该是小写的,只包含字母数字,空格应替换为连字符。  
+
+您可以进入该文件夹并在其中创建两个名为 ``index.md`` 和 ``toc.yml`` 的文件。  
+这些文件是必需的,尽管 ``index.md`` 现在可以为空。  
+
+在我们专注于实际制作文档之前,我们必须使您的类别在目录中可见。 
+
+让我们打开 ``articles/toc.yml`` 文件,它现在类似于这样:
 ```yaml
 - name: Getting Started
   href: getting-started/
@@ -137,10 +138,10 @@ Let's open ``articles/toc.yml`` file, which now looks similar to this:
 
 ```
 
-We'll copy ``Getting Started`` item and append it just below with changed details.
+我们将复制 ``Getting Started`` 并在下面附加修改后的详细信息。  
 
 > [!CAUTION]
-> Make sure that ``How to Contribute`` item is always at the bottom.
+> 确保 ``How to Contribute``项始终位于底部。
 
 > Before:
 > ```yaml
@@ -164,27 +165,27 @@ We'll copy ``Getting Started`` item and append it just below with changed detail
 > 
 > ```
 
-If you've done everything correctly to this point, your category should now be visible.
+如果到目前为止您做的一切都正确无误,您的类别现在应该可见。  
 
-Let's go back to our ``index.md`` file created earlier.
+让我们回到之前创建的 ``index.md`` 文件。
 
-Index file in our category should contain short summary and
-what articles are featured.
+我们类别中的索引文件应包含简短的摘要和  
+何种文章被展示。
 
-Now we can move on to [next step](#single-article) below.
+现在我们可以转到下面的[下一步](#single-article)。  
 
-### Single article
+### 单篇文档
 
-Now you can create file in ``articles/`` directory (or in your category directory) with title as filename and `.md` extension.
+现在您可以在 ``articles/`` 目录(或您的类别目录)中创建以标题为文件名和 `.md` 扩展名的文件。    
 
 > [!TIP]
-> Remember, filename should be lowercase, alphanumeric and spaces should be replaced with hyphen.
+> 请记住,文件名应该是小写的,只包含字母数字,空格应替换为连字符。
 
-Now that file will be included in generation process, but it's not visible in Table of Contents (also abbreviated as ToC) yet.
+现在,该文件将包含在生成过程中,但它在目录(也称为ToC)中尚不可见。  
 
-To happen so, we need to add new entry in `toc.yml` file in the same directory, so your file will be fully visible.
+要实现这一点,我们需要在同一目录中的 `toc.yml` 文件中添加新条目,以使您的文件完全可见。
 
-> Before:
+> 之前:
 > ```yaml
 > - name: Getting Started
 >   href: getting-started/
@@ -193,7 +194,7 @@ To happen so, we need to add new entry in `toc.yml` file in the same directory, 
 >   href: contributing.md
 > 
 > ```
-> After:
+> 之后:
 > ```yaml
 > - name: Getting Started
 >   href: getting-started/
@@ -205,12 +206,12 @@ To happen so, we need to add new entry in `toc.yml` file in the same directory, 
 > 
 > ```
 
-In case you're creating __article series__, your ``toc.yml`` file is more likely empty at the moment.
-You don't need to copy code above, you'll only need to add new item.
+如果您正在创建 __系列文档__ 您的``toc.yml``文件目前很可能是空的。  
+您不需要复制上面的代码,您只需要添加新项目。
 
-Now we can switch to our file content and first text which will be title formatted as ``Heading 1``.
+现在我们可以切换到文件内容和第一个标题格式为 ``Heading 1`` 的文本。
 
-> Example:
+> 案例:
 > ```md
 > # Contribution
 > 
@@ -218,12 +219,12 @@ Now we can switch to our file content and first text which will be title formatt
 > 
 > ```
 
-If you encounter trouble with Markdown, you can refresh your memory [here](https://www.markdownguide.org/basic-syntax).
+如果您遇到Markdown的问题,您可以在[此处](https://www.markdownguide.org/basic-syntax)刷新记忆。  
 
-## Publishing your work
+## 发布您的工作  
 
-Once you have finished working on your changes, you can submit a pull request to have your changes merged into the repository and included in the documentation.
+完成对更改的工作后,您可以提交拉取请求,将您的更改合并到存储库中并包含在文档中。  
 
-Before submitting a pull request, make sure that you've verified your work.
+提交拉取请求之前,请确保您已验证工作。  
 
-If you've doubts or need help with something, feel free to ask in alt:V Discord server [#scripting-offtopic](https://discord.com/channels/371265202378899476/576771706119520287).
+如果您有疑问或需要帮助解决某些问题,请随时在alt:V Discord服务器[#scripting-offtopic](https://discord.com/channels/371265202378899476/576771706119520287)询问。
