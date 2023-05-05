@@ -41,6 +41,14 @@
 >   - 还原车辆角速度抖动修复
 > - 14.16:
 >   - 车辆角速度抖动修复
+> - 14.17:
+>   - Revert network optimizations
+> - 14.18:
+>   - weapon meta crashes
+> - 14.19:
+>   - Fix linux client
+> - 14.20:
+>   - Another fix for linux client
 > ```
 
 ## 客户端
