@@ -31,16 +31,10 @@
 |   -skipprocessconfirmation  |   跳过关闭已运行的GTA V/alt:V实例的确认消息   |  
 |   -linux                    |   启用 linux 模式   |
 
-## 服务器命令
+## 服务端命令
 
 | 键       |             描述           | 
 | ------    | :-------------------------------: |
 |   start [resourcename]    |   按名称启动服务器资源    |  
 |   stop [resourcename]     |   按名称停止服务器资源     |
 |   restart [resourcename]  |   按名称重启服务器资源  |
-
-## 客户端命令
-
-| 键       |             描述           |
-| ------    | :-------------------------------: |
-| clear     |   清除控制台缓冲区            |
