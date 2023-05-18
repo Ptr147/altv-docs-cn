@@ -13,10 +13,8 @@
 # [Javascript](#tab/tabid-1)  
 
 ```js
-import fetch from "node-fetch";  
-
-const RETRY_DELAY = 2500;   //重试延迟
-const DEBUG_PORT = 9223;   //调试端口
+const RETRY_DELAY = 2500; //重试延迟
+const DEBUG_PORT = 9223;  //调试端口
 
 async function getLocalClientStatus() { //获取本地客户端状态
   try {
@@ -52,10 +50,8 @@ connectLocalClient();   //调用connectLocalClient
 # [Typescript](#tab/tabid-2)
 
 ```ts
-import fetch from "node-fetch";  
-
-const enum Status {    
-  Loading = "LOADING",    
+const enum Status {
+  Loading = "LOADING",
   MainMenu = "MAIN_MENU",
   DownloadingFiles = "DOWNLOADING_FILES",    
   Connecting = "CONNECTING",    
