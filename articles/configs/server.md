@@ -38,14 +38,22 @@ announceRetryErrorDelay = 10000
 announceRetryErrorAttempts = 50
 # 可以使用相同 IP 地址连接的最大玩家数 
 duplicatePlayers = 4096# 定义地图边界大小 
-mapBoundsMinX = 10000#值被视为负 
-mapBoundsMinY = 10000#值被视为负 
+
+# 定义地图矩形区域大小
+mapBoundsMinX = -10000
+mapBoundsMinY = -10000
 mapBoundsMaxX = 65536
 mapBoundsMaxY = 65536 
-mapCellAreaSize = 100#较小的区域使用更多的内存和较少的 CPU  # 定义应该发生 colshape 计算的速率(毫秒)(dev/13.0-dev32 和更高版本)
-colShapeTickRate = 200  # 定义服务器应使用的日志流(控制台、文件、stdconsole)(dev/13.0-dev32 和更高版本) 
-logStreams = [ "console", "file" ]# 定义用于实体计算(如 colshapes、streaming 等)的工作线程数。良好的值为 CPU 数*2 
-entityWorkerCount = 8# 您的服务器的标签(最多 4 个)
+mapCellAreaSize = 100 # 较小的区域使用更多的 RAM 和更少的 CPU
+
+# 定义 colshape 计算的速率(毫秒)
+colShapeTickRate = 200  
+
+# 定义服务器使用的日志流 (console, file, stdconsole)
+logStreams = [ "console", "file" ]
+entityWorkerCount = 8 
+
+# 您的服务器的标签(最多 4 个)
 tags = [
     "自由",
     "有趣"
@@ -72,7 +80,9 @@ resources = [
     "myResource",
     # 从 alt:V 10.0 开始,您还可以使用子目录中的资源 
     "vehicles/firstVehicle",
-    "vehicles/secondVehicle"
+    "vehicles/secondVehicle",
+    # Since alt:V 15.0 you can even use * wildcard character to use all folders as resources
+    "vehicles/*",
 ]
 # 应加载的所有模块的数组
 modules = [
@@ -80,12 +90,29 @@ modules = [
     "csharp-module"
 ]
 
-# 实体创建、流媒体系统等的分析  
-[worldProfiler]  
+# 仅启用特定的 DLC 包
+dlc-whitelist = [
+    "mpBeach",
+    "mpBusiness",
+    "patchday27ng"
+]
+
+# 混淆资源名称
+hashClientResourceName = true
+
+# 扩展 GTA 池大小
+[pools]
+"DrawableStore" = 240420
+
+# 实体创建/流媒体系统等的分析
+[worldProfiler]
 port = 7797
 host = "0.0.0.0"
 
-# 与 js-module 相关的设置
+[threads]
+streamer = 1
+
+# js-module 相关设置
 [js-module]
 # "https://nodejs.org/api/cli.html#--enable-source-maps"
 source-maps = true  

@@ -9,7 +9,6 @@
 
 > [!div class="nohljsln"]
 > ```yaml
-> - Modify gamepool size
 > - mute loading music
 > - DISABLE_VEHICLE_ENGINE_SHUTDOWN_ON_LEAVE flag to keep engines on when leaving a vehicle
 > - worldObjectPositionChange event
@@ -36,6 +35,8 @@
 > - Extended Voice API Permission
 > - isFullScreen method
 > - cef hardware acceleration
+> - improve ressource loading speed
+> - downloadspeed settings
 > ```
 
 ### Fixed
@@ -51,6 +52,9 @@
 > - webview didnt get destroyed
 > - wrong reported resource downloadspeed
 > - optional permissions
+> - cancel button crashed client
+> - voiceInputVolume sets volume in reverse
+> - ladder sync
 > ```
 
 ## Server
@@ -60,6 +64,8 @@
 > [!div class="nohljsln"]
 > ```yaml
 > - Removed PlayerBeforeConnect event
+> - Removed id support for entityinstreamingrange method
+> - Removed entityWorkerCount server option
 > ```
 
 ### Added
@@ -84,6 +90,15 @@
 > - socialClubName info in connectioInfo
 > - option (spawnAfterConnect = true) to spawn player automatically at position 0,0,71
 > - no-regenerate-rpf-cache cmd line arg
+> - error message if justpack gets used without valid host config
+> - possible to enable only specific gta dlcs with the dlc-whitelist config option
+> - player streamedEntities getter
+> - hashClientResourceName server option
+> - Modify gamepool size via server config
+> - prometheus support
+> - Missing maxDistance & isSpatial voicechannel getter
+> - streamer thread count can be configured in server.toml
+> - resource wildcard support in server.toml
 > ```
 
 ### Fixed
@@ -96,6 +111,14 @@
 > ```
 
 ## Server & Client
+
+### <span style="color: red;">Breaking changes</span>
+
+> [!div class="nohljsln"]
+> ```yaml
+> - Removed alt.Entity.getByID method
+> ```
+
 > [!div class="nohljsln"]
 > ```yaml
 > - getByID & getByRemoteID method for baseobjects
@@ -121,5 +144,15 @@
 > ```yaml
 > - (Client) toggleStrictChecks for natives
 > - (Server|Client) baseObjectCreate & baseObjectRemove event
-> - (Server) Missing maxDistance & isSpatial voicechannel getter
+> ```
+
+
+## C# Module
+
+### <span style="color: red;">Breaking changes</span>
+
+> [!div class="nohljsln"]
+> ```yaml
+> - Removed deprecated Alt.Server property
+> - All element constructors are deprecated. Please only use Alt.Create* or AltAsync.Create* instead. In one of the next updates the constructors will be removed.
 > ```
