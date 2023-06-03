@@ -42,52 +42,52 @@ const metaValue = alt.getMeta("metaKey");
 alt.deleteMeta("metaKey");
 ```
 
-Applying a global meta bound to a entity
+将 全局元(global meta) 绑定应用于实体
 
 ```js
 alt.on("playerConnect", (player) => {
     // Set a player meta (single-sided, cross-resource) with a given key and value
     player.setMeta("username", player.name);
-    // Check if the meta is set and log the result
+    // 检查元是否已设置并记录结果
     if (player.hasMeta("username")) {
         alt.log("Meta is set");
     } else {
         alt.log("Meta isn't set");
     }
-    // Fetch and save the value of the meta
+    // 获取并保存元的值
     const metaValue = player.getMeta("username");
-    // Delete the meta
+    // 删除元
     player.deleteMeta("metaKey");
 });
 ```
 
-Listening for global meta changes
+监听 全局元(global meta) 修改
 
 ```js
 alt.on("globalMetaChange", (key, newValue, oldValue) => {
-    // This event gets called when a meta changes which is applied to alt
-    // You can also check it yourself by using the alt.hasMeta & alt.getMeta methods
+    // 当应用于alt的元发生更改时调用此事件
+    // 您也可以使用 alt.hasMeta 和 alt.getMeta 方法自行检查
     if (alt.hasMeta("metaKey")) {
         const metaValue = alt.getMeta("metaKey");
-        // <Do something with the value>
+        // <使用该值做一些事情>
     }
 });
 ```
 
 # [TS](#tab/tab1-1)
 
-Meta declaration in the interface (can be added to .ts or .d.ts file)
+接口中的 元(meta) 声明(可以添加到.ts或.d.ts文件中)
 
 ```ts
 declare module "alt-shared" {
-  // extending interface by interface merging
+  // 通过接口合并扩展接口
   export interface ICustomGlobalMeta {
     metaKey: string
   }
 }
 ```
 
-The usage is the same as in JS:
+用法与JS中相同：
 
 **Server & Client**
 
@@ -97,12 +97,12 @@ const metaValue /* string | undefined */  = alt.getMeta("metaKey");
 
 # [C#](#tab/tab1-2)
 
-Applying a global meta
+应用全局元(global meta)
 
 ```cs
-// Set a global meta (single-sided, cross-resource) with a given key and value
+// 使用给定的键和值设置全局元(单面/跨资源)
 Alt.SetMetaData("metaKey", "metaValue");
-// Check if the meta is set and log the result
+// 检查元是否已设置并记录结果
 if (Alt.HasMetaData("metaKey"))
 {
     Alt.Log("Meta is set");
@@ -111,21 +111,21 @@ else
 {
     Alt.Log("Meta isn't set");
 }
-// Fetch and save the value of the meta
-// When using C# it is required to pass the type of the meta value
+// 获取并保存元的值
+// 使用C#时，需要传递元值的类型
 var valueIsFetched = Alt.GetMetaData<string>("metaKey", out var metaData);
-// Delete the meta
+// 删除元
 Alt.DeleteMetaData("metaKey");
 ```
 
-Applying a global meta bound to a entity
+将全局元绑定应用于实体
 
 ```cs
 Alt.OnPlayerConnect += (player, reason) =>
 {
-    // Set a player meta (single-sided, cross-resource) with a given key and value
+    // 使用给定的键和值设置玩家元(单面/交叉资源)
     player.SetMetaData("username", player.Name);
-    // Check if the meta is set and log the result
+    // 检查元是否已设置并记录结果
     if (player.HasMetaData("username"))
     {
         Alt.Log("Meta is set");
@@ -134,116 +134,115 @@ Alt.OnPlayerConnect += (player, reason) =>
     {
         Alt.Log("Meta isn't set");
     }
-    // Fetch and save the value of the meta
-    // When using C# it is required to pass the type of the meta value
+    // 获取并保存元的值
+    // 使用C#时，需要传递元值的类型
     var valueIsFetched = player.GetMetaData<string>("username", out var metaData);
-    // Delete the meta
+    // 删除元
     player.DeleteMetaData("metaKey");
 };
 ```
 
-Listening for entity meta changes
+侦听实体的元更改
 
 ```cs
 Alt.OnMetaDataChange += (entity, key, value) =>
 {
-    // This event gets called when a meta changes which is applied to a entity
-    // You can also check it yourself by using the entity.HasMetaData & entity.GetMetaData methods
+    // 当应用于实体的元发生更改时调用此事件
+    // 您也可以使用 entity.HasMetaData 或 entity.GetMetaData 方法自己检查它
     if (entity.HasMetaData("metaKey")) {
         var valueIsFetched = entity.GetMetaData<string>("metaKey", out var metaValue);
-        // <Do something with the value>
+        // <使用该值做一些事情>
     }
 };
 ```
 ---
 
-## Local Meta
+## 本地元(Local Meta)
 
-A local meta is always set to a player instance and can only be modified on server-side.
-This data is accessible from all resources, but on the client side only from the respective player on which the meta was
-set.
+本地元总是设置为播放器实例，并且只能在服务器端进行修改。
+这些数据可以从所有资源访问，但在客户端只能从设置元的相应播放器访问。
 
 # [JS](#tab/tab2-0)
 
 **Server**
 
-Applying a local meta bound to a entity
+将本地元绑定应用于实体
 
 ```js
 alt.on("playerConnect", (player) => {
-    // Set a player local meta (set by server, synced to server & client, cross-resource) with a given key and value
+    // 使用给定的键和值设置玩家本地元(由服务器设置，同步到服务器和客户端，跨资源)
     player.setLocalMeta("username", player.name);
-    // Check if the local meta is set and log the result
+    // 检查是否设置了本地元并记录结果
     if (player.hasLocalMeta("username")) {
         alt.log("Meta is set");
     } else {
         alt.log("Meta isn't set");
     }
-    // Fetch and save the value of the local meta
+    // 获取并保存本地元的值
     const metaValue = player.getLocalMeta("username");
-    // Delete the meta (only available on server)
+    // 删除元(仅在服务器上可用)
     player.deleteLocalMeta("username");
 });
 ```
 
-Listening for local meta changes
+侦听本地元更改
 
 ```js
 alt.on("localMetaChange", (player, key, newValue, oldValue) => {
-    // This event gets called when a local meta changes
-    // You can also check it yourself by using the player.hasLocalMeta & player.getLocalMeta methods
+    // 本地元更改时调用此事件
+    // 您也可以使用p layer.hasLocalMeta 和 player.getLocalMeta 方法自行检查
     if (player.hasLocalMeta("metaKey")) {
         const metaValue = player.getLocalMeta("metaKey");
-        // <Do something with the value>
+        // <使用该值做一些事>
     }
 });
 ```
 
 **Client**
 
-Checking if a local meta is set
+检查是否设置了本地元
 
 ```js
 alt.on("spawned", () => {
-    // Check if the local meta is set
+    // 检查是否设置了本地元
     if (alt.hasLocalMeta("username")) {
         alt.log("Meta is set");
     } else {
         alt.log("Meta isn't set");
         return;
     }
-    // Fetch and save the value of the local meta
+    // 获取并保存本地元的值
     const metaValue = alt.getLocalMeta("username");
 });
 ```
 
-Listening for local meta changes
+侦听本地元更改
 
 ```js
 alt.on("localMetaChange", (key, newValue, oldValue) => {
-    // This event gets called when a local meta changes
-    // You can also check it yourself by using the alt.hasLocalMeta & alt.getLocalMeta methods
+    // 本地元更改时调用此事件
+    // 您也可以使用 alt.hasLocalMeta 和 alt.getLocalMeta 方法自行检查
     if (alt.hasLocalMeta("metaKey")) {
         const metaValue = alt.getLocalMeta("metaKey");
-        // <Do something with the value>
+        // <使用该值做一些事情>
     }
 });
 ```
 
 # [TS](#tab/tab2-1)
 
-Meta declaration in the interface (can be added to .ts or .d.ts file)
+接口中的元声明(可以添加到.ts或.d.ts文件中)
 
 ```ts
 declare module "alt-shared" {
-  // extending interface by interface merging
+  // 通过接口合并扩展接口
   export interface ICustomPlayerLocalMeta {
     username: string
   }
 }
 ```
 
-The usage is the same as in JS:
+用法与JS中相同:
 
 **Server**
 
@@ -261,14 +260,14 @@ const metaValue /* string | undefined */ = alt.getLocalMeta("username");
 
 **Server**
 
-Applying a local meta bound to a entity
+将本地元绑定应用于实体
 
 ```cs
 Alt.OnPlayerConnect += (player, reason) =>
 {
-    // Set a player local meta (set by server, synced to server & client, cross-resource) with a given key and value
+    // 使用给定键的和值设置玩家本地元(由服务器设置，同步到服务器和客户端，跨资源)
     player.SetLocalMetaData("username", player.Name);
-    // Check if the local meta is set and log the result
+    // 检查是否设置了本地元并记录结果
     if (player.HasLocalMetaData("username"))
     {
         Alt.Log("Meta is set");
@@ -277,40 +276,40 @@ Alt.OnPlayerConnect += (player, reason) =>
     {
         Alt.Log("Meta isn't set");
     }
-    // Fetch and save the value of the local meta
-    // When using C# it is required to pass the type of the meta value
+    // 获取并保存本地元的值
+    // 使用C#时，需要传递元值的类型
     var valueIsFetched = player.GetLocalMetaData<string>("username", out var metaData);
-    // Delete the meta
+    // 删除元
     player.DeleteLocalMetaData("username");
 };
 ```
 ---
 
-## Synced Meta
+## 同步元(Synced Meta)
 
-A synced meta is distributed to all resources & clients and can be used in the following ways:
+同步元被分发到所有资源和客户端，可以通过以下方式使用:
 
-- Global (applied to alt)
-- Bound to an entity (applied to a player or vehicle)
+- 全局（应用于alt）
+- 绑定到实体（应用于玩家或车辆）
 
 # [JS](#tab/tab3-0)
 
 **Server**
 
-Applying a global synced meta
+应用全局同步元
 
 ```js
-// Set a global synced meta (server & client, cross-resource) with a given key and value
+// 使用给定的键和值设置全局同步元(服务器和客户端，跨资源)
 alt.setSyncedMeta("metaKey", "metaValue");
-// Check if the meta is set and log the result
+// 检查元是否已设置并记录结果
 if (alt.hasSyncedMeta("metaKey")) {
     alt.log("Meta is set");
 } else {
     alt.log("Meta isn't set");
 }
-// Fetch and save the value of the meta
+// 获取并保存元的值
 const metaValue = alt.getSyncedMeta("metaKey");
-// Delete the meta
+// 删除元
 alt.deleteSyncedMeta("metaKey");
 ```
 
@@ -318,82 +317,82 @@ Applying a global synced meta bound to a entity
 
 ```js
 alt.on("playerConnect", (player) => {
-    // Set a synced meta (server & client, cross-resource) with a given key and value 
+    // 使用给定的键和值设置同步元(服务器和客户端，跨资源)
     player.setSyncedMeta("metaKey", "metaValue");
-    // Check if the meta is set and log the result
+    // 检查元是否已设置并记录结果
     if (player.hasSyncedMeta("metaKey")) {
         alt.log("Meta is set");
     } else {
         alt.log("Meta isn't set");
     }
-    // Fetch and save the value of the meta
+    // 获取并保存元的值
     const metaValue = player.getSyncedMeta("metaKey");
 });
 ```
 
-Listening for synced meta changes
+侦听同步的元更改
 
 ```js
 alt.on("syncedMetaChange", (entity, key, newValue, oldValue) => {
-    // This event gets called when a synced meta changes which is applied to an entity  
-    // You can also check it yourself by using the entity.hasSyncedMeta(key) method
+    // 当应用于实体的同步元发生更改时调用此事件
+    // 您也可以使用 entity.hasSyncedMeta(key) 方法自己进行检查
     if (entity.hasSyncedMeta("metaKey")) {
         const metaValue = entity.getSyncedMeta("metaKey");
-        // <Do something with the value>
+        // <使用该值做一些事情>
     }
 });
 ```
 
 **Client**
 
-Checking if global synced meta is set
+正在检查是否设置了全局同步元
 
 ```js
 alt.on("spawned", () => {
-    // Check if the global synced meta is set
+    // 检查是否设置了全局同步元
     if (alt.hasSyncedMeta("metaKey")) {
         alt.log("Meta is set");
     } else {
         alt.log("Meta isn't set");
     }
-    // Fetch and save the value of the meta
+    // 获取并保存元的值
     const metaValue = alt.getSyncedMeta("metaKey");
 });
 ```
 
-Listening for global synced meta changes
+侦听全局同步的元更改
 
 ```js
 alt.on("globalSyncedMetaChange", (key, newValue, oldValue) => {
-    // This event gets called when a synced meta changes which is applied to alt
-    // You can also check it yourself by using the alt.hasSyncedMeta(key) method
+    // 当应用于 alt 的同步元发生更改时调用此事件
+    // 您也可以使用 alt.hasSyncedMeta(key) 方法自行检查
     if (alt.hasSyncedMeta("metaKey")) {
         const metaValue = alt.getSyncedMeta("metaKey");
-        // <Do something with the value>
+        // <使用该值做一些事情>
     }
 });
 ```
 
-Listening for synced meta changes
+侦听同步的元更改
 
 ```js
 alt.on("syncedMetaChange", (entity, key, newValue, oldValue) => {
-    // This event gets called when a synced meta changes which is applied to an entity  
-    // You can also check it yourself by using the entity.hasSyncedMeta(key) method
+    // 当应用于实体的同步元发生更改时调用此事件
+    // 您也可以使用 entity.hasSyncedMeta(key) 方法自己进行检查
     if (entity.hasSyncedMeta("metaKey")) {
         const metaValue = entity.getSyncedMeta("metaKey");
-        // <Do something with the value>
+        // <使用该值做一些事情>
     }
 });
 ```
 
 # [TS](#tab/tab3-1)
 
-Meta declaration in the interface (can be added to .ts or .d.ts file)
+接口中的元声明(可以添加到.ts或.d.ts文件中)
 
 ```ts
 declare module "alt-shared" {
-  // extending interface by interface merging
+  // 通过接口合并扩展接口
 
   export interface ICustomGlobalSyncedMeta {
     globalMetaKey: string
@@ -405,7 +404,7 @@ declare module "alt-shared" {
 }
 ```
 
-The usage is the same as in JS:
+用法与JS中相同:
 
 **Server & Client**
 
@@ -418,14 +417,14 @@ const playerMetaValue /* string | undefined */ = player.getSyncedMeta("playerMet
 
 **Server**
 
-Applying a global meta
+应用全局元
 
 ```cs
 Alt.OnPlayerConnect += (player, reason) =>
 {
-    // Set a player local meta (set by server, synced to server & client, cross-resource) with a given key and value
+    // 使用给定键的和值设置玩家本地元(由服务器设置，同步到服务器和客户端，跨资源)
     player.SetLocalMetaData("username", player.Name);
-    // Check if the local meta is set and log the result
+    // 检查是否设置了本地元并记录结果
     if (player.HasLocalMetaData("username"))
     {
         Alt.Log("Meta is set");
@@ -434,78 +433,78 @@ Alt.OnPlayerConnect += (player, reason) =>
     {
         Alt.Log("Meta isn't set");
     }
-    // Fetch and save the value of the local meta
-    // When using C# it is required to pass the type of the meta value
+    // 获取并保存本地元的值
+    // 使用C#时，需要传递元值的类型
     var valueIsFetched = player.GetLocalMetaData<string>("username", out var metaData);
-    // Delete the meta
+    // 删除元
     player.DeleteMetaData("username");
 };
 ```
 ---
 
-## Stream Synced Meta
+## 流同步元数据(Stream Synced Meta)
 
-A synced meta is distributed to all resources & clients and can be used bound to an entity.
-It is basically the same as a synced meta, but only gets send to clients in the streaming range of the entity.
+同步元被分发到所有资源和客户端，并且可以绑定到实体使用。
+它基本上与同步元相同，但只发送到实体流范围内的客户端。
 
 # [JS](#tab/tab4-0)
 
 **Server**
 
-Applying a stream synced meta bound to a entity
+将流同步元绑定到实体
 
 ```js
 alt.on("playerConnect", (player) => {
-    // Set a stream synced meta (server & client, cross-resource) with a given key and value 
+    // 使用给定的密钥和值设置流同步元(服务器和客户端，跨资源)
     player.setStreamSyncedMeta("metaKey", "metaValue");
-    // Check if the meta is set and log the result
+    // 检查元是否已设置并记录结果
     if (player.hasStreamSyncedMeta("metaKey")) {
         alt.log("Meta is set");
     } else {
         alt.log("Meta isn't set");
     }
-    // Fetch and save the value of the meta
+    // 获取并保存元的值
     const metaValue = player.getStreamSyncedMeta("metaKey");
-    // Delete the meta
+    // 删除元
     player.deleteStreamSyncedMeta("metaKey");
 });
 ```
 
-Listening for stream synced meta changes
+侦听流同步的元更改
 
 ```js
 alt.on("streamSyncedMetaChange", (entity, key, newValue, oldValue) => {
-    // This event gets called when a stream synced meta changes which is applied to an entity  
-    // You can also check it yourself by using the entity.hasStreamSyncedMeta(key) method
+    // 当应用于实体的流同步元发生更改时调用此事件
+    // 您也可以使用 entity.hasStreamSyncedMeta(key) 方法自行检查
     if (entity.hasStreamSyncedMeta("metaKey")) {
         const metaValue = entity.getStreamSyncedMeta("metaKey");
-        // <Do something with the value>
+        // <使用该值做一些事情>
     }
 });
 ```
 
 **Client**
 
-Listening for stream synced meta changes (basically the same as on the server side)
+侦听流同步的元更改 (basically the same as on the server side)
 
 ```js
 alt.on("streamSyncedMetaChange", (entity, key, newValue, oldValue) => {
-    // This event gets called when a stream synced meta changes which is applied to an entity  
-    // You can also check it yourself by using the entity.hasStreamSyncedMeta(key) method
+    // 当应用于实体的流同步元发生更改时调用此事件
+    // 您也可以使用 entity.hasStreamSyncedMeta(key) 方法自行检查
     if (entity.hasStreamSyncedMeta("metaKey")) {
         const metaValue = entity.getStreamSyncedMeta("metaKey");
-        // <Do something with the value>
+        // <使用该值做一些事情>
     }
 });
 ```
 
 # [TS](#tab/tab4-1)
 
-Meta declaration in the interface (can be added to .ts or .d.ts file)
+接口中的元声明(可以添加到.ts或.d.ts文件中)
 
 ```ts
 declare module "alt-shared" {
-  // extending interface by interface merging
+  // 通过接口合并扩展接口
 
   // alt.Player and alt.Vehicle
   export interface ICustomEntityStreamSyncedMeta {
@@ -524,7 +523,7 @@ declare module "alt-shared" {
 }
 ```
 
-The usage is the same as in JS:
+用法与JS中相同:
 
 **Server & Client**
 
@@ -538,12 +537,12 @@ const vehicleMetaValue /* boolean | undefined */ = vehicle.getSyncedMeta("vehicl
 
 **Server**
 
-Applying a stream synced meta bound to a entity
+将流同步元绑定到实体
 
 ```cs
 Alt.OnPlayerConnect += (player, reason) =>
 {
-    // Set a stream synced meta (set by server, synced to server & client, cross-resource) with a given key and value
+    // 使用给定的键和值设置流同步元(由服务器设置，同步到服务器和客户端，跨资源)
     player.SetStreamSyncedMetaData("username", player.Name);
     // Check if the stream synced meta is set and log the result
     if (player.HasStreamSyncedMetaData("username"))
@@ -554,28 +553,28 @@ Alt.OnPlayerConnect += (player, reason) =>
     {
         Alt.Log("Meta isn't set");
     }
-    // Fetch and save the value of the stream synced meta
-    // When using C# it is required to pass the type of the meta value
+    // 获取并保存流同步元数据的值
+    // 使用C#时，需要传递元值的类型
     var valueIsFetched = player.GetStreamSyncedMetaData<string>("username", out var metaData);
-    // Delete the meta
+    // 删除元
     player.DeleteStreamSyncedMetaData("username");
 };
 ```
 ---
 
-## Remarks
+## 谈论(Remarks)
 
 > [!WARNING] 
-> The meta change events are only called if the (new) data is not yet known to the client.
-> If this data is already known, it must be queried & processed independently, for example via the gameEntityCreate event.
+> 只有当客户端还不知道（新的）数据时，才会调用元更改事件。
+> 如果此数据已知，则必须独立查询和处理，例如通过 gameEntityCreate 事件。
 
-Let's take the example case of a **streamSyncedMeta** with the key `trackWidth`, which sets the track width of a vehicle.
+让我们以 **streamSyncedMeta** 的示例案例为例,其中键为 `trackWidth` 用于设置车辆的轨道宽度。
 
-The event `streamSyncedMetaChange` is only called here if the client does not yet know this value.\
-If you now leave the streaming range and then return to it, the vehicle is created, but no 'streamSyncedMetaChange' event is triggered.\
-To ensure that the values are always applied, the `gameEntityCreate` event must also be used.
+仅当客户端还不知道此值时,才会调用事件 `streamSyncedMetaChange` \  
+如果现在离开流范围,然后返回到该范围,则会创建车辆,但不会触发 'streamSyncedMetaChange' 事件。
+要确保始终应用值,还必须使用 `gameEntityCreate` 事件。
 
-Here is an example:
+这里是一个示例:
 
 # [Server](#tab/tab5-0)
 
@@ -587,13 +586,13 @@ vehicle.setStreamSyncedMeta("trackWidth", 0.85);
 # [Client](#tab/tab5-1)
 
 ```js
-// This is called when the meta is communicated to the client for the first time
+// 这在元数据首次向客户端通信时调用
 alt.on("streamSyncedMetaChange", (entity, key, newValue, oldValue) => {
     if (key === "trackWidth") setTrackWidth(entity, newValue);
 });
 
-// This is called as soon as the vehicle is created on the client
-// Here we check if the vehicle has the meta and if so process it
+// 这在客户端上首次创建车辆时立即调用
+// 在这里,我们检查车辆是否具有元数据,如果是,则处理它
 alt.on("gameEntityCreate", (entity) => {
     if (entity.hasStreamSyncedMeta("trackWidth")) {
         const trackWidth = entity.getStreamSyncedMeta("trackWidth");
@@ -601,12 +600,12 @@ alt.on("gameEntityCreate", (entity) => {
     }
 });
 
-// If applicable, the `gameEntityDestroy` event can be used to undo changes that should only exist as long as the entity exists.
+// 如果适用,可以使用 `gameEntityDestroy` 事件来撤消只在实体存在时才存在的更改
 alt.on("gameEntityDestroy", (entity) => {
-   // Remove meta changes for example 
+   // 例如,删除元数据更改
 });
 
-// To avoid duplicating the code in both events we move it to its own function
+// 为了避免在两个事件中重复代码,我们将其移动到自己的函数中
 function setTrackWidth(entity, trackWidth) {
     for (let i = 0; i < entity.wheelsCount; i++) {
         entity.setWheelTrackWidth(i, trackWidth);
