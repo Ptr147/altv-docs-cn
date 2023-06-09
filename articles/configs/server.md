@@ -111,6 +111,7 @@ host = "0.0.0.0"
 
 [threads]
 streamer = 1
+migration = 1
 
 # js-module 相关设置
 [js-module]
