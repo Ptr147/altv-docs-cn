@@ -10,15 +10,16 @@
 > [!div class="nohljsln"]
 > ```yaml
 > - mute loading music
-> - DISABLE_VEHICLE_ENGINE_SHUTDOWN_ON_LEAVE flag to keep engines on when leaving a vehicle
-> - worldObjectPositionChange event
+> - DISABLE_VEHICLE_ENGINE_SHUTDOWN_ON_LEAVE configflag to keep engines on when leaving a vehicle
+> - FORCE_RENDER_SNOW configflag to enable snow on any weather
+> - FORCE_HIDE_NIGHT_PROPS & FORCE_HIDE_NIGHT_PROPS
+> - DISABLE_EMISSIVE_LIGHTS_RENDERING configflag to enable / disable emissive lights
 > - audio, checkpoint, webview all getter
 > - audio, webview, httpclien, websocketclient id getter
 > - audio, blip remoteid getter
-> - worldObjectStreamIn & worldObjectStreamOut event
-> - audio filter api
-> - colshape api
-> - textlabel api
+> - worldObjectPositionChange, worldObjectStreamIn & worldObjectStreamOut event
+> - entityHitEntity event
+> - audio filter, colshape, textlabel, weaponObject api
 > - dimension getter, position & rotation setter for localplayer
 > - httpclient, rmldocument, websocketclient, webview, checkpoint getbyID method
 > - blip getByScriptID method
@@ -37,6 +38,11 @@
 > - cef hardware acceleration
 > - improve ressource loading speed
 > - downloadspeed settings
+> - entity frozen setter/getter
+> - taskchange event is cancable
+> - startEnteringVehicle & startLeavingVehicle events
+> - webview reload method
+> - sourceentity parameter to weaponDamage event
 > ```
 
 ### Fixed
@@ -55,6 +61,7 @@
 > - cancel button crashed client
 > - voiceInputVolume sets volume in reverse
 > - ladder sync
+> - localplayer micLevel & isTalking getter
 > ```
 
 ## Server
@@ -97,8 +104,10 @@
 > - Modify gamepool size via server config
 > - prometheus support
 > - Missing maxDistance & isSpatial voicechannel getter
-> - streamer thread count can be configured in server.toml
+> - streamer, migration thread count can be configured in server.toml
 > - resource wildcard support in server.toml
+> - getWeaponModelInfoByHash method & weaponmodels.bin file
+> - ammo getter & setter method
 > ```
 
 ### Fixed
