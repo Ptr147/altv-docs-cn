@@ -1,18 +1,17 @@
-# Checkpoint API
+# 检查点 API
 
-Since alt:V Update 15 there is a class for creating client side checkpoints. These client side checkpoints are easier to create and use, as they are automatically streamed on client side.
+自alt:V更新15以来，新增了用于创建客户端检查点的类。这些客户端检查点更容易创建和使用，因为它们会自动在客户端进行流式传输。
 
-## Usage
+## 用法
 
 [Checkpoint class in JS API reference](https://docs.altv.mp/js/api/alt-client.Checkpoint.html)<br>
 [Checkpoint class in C# API reference](https://docs.altv.mp/cs/api/AltV.Net.Client.Elements.Entities.Checkpoint.html)<br>
 
 > [!TIP]
-> Checkpoints inherit the [ColShape class](https://docs.altv.mp/js/api/alt-client.Colshape.html), thus colShape events work on it aswell.
+> 检查点继承了[ColShape 类](https://docs.altv.mp/js/api/alt-client.Colshape.html)，因此colShape事件也会在其上起作用。
+### 示例
 
-### Example
-
-This example changes the Checkpoint Color to green when the local Player enters it. When the local Player is not inside of it, the checkpoint color will be red. 
+该示例在本地玩家进入检查点时将检查点颜色更改为绿色。当本地玩家不在其中时，检查点颜色将为红色。
 
 <img src="https://i.imgur.com/Fb8c07U.png">
 <img src="https://i.imgur.com/QQlM132.png">
