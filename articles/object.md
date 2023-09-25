@@ -1,23 +1,23 @@
-# Object API
+# 对象 API
 
-Since alt:V Update 15 you are able to create server side streamed & synchronized objects. These server side created objects are dynamic and will be synced with full physics to all players near.
+自alt:V更新V15以来，您可以创建服务器端流式传输并同步的物体。这些服务器端创建的物体是动态的，并将通过完整的物理同步给附近的所有玩家
 
 > [!WARNING]
-> Only use them when physics are necessary, as they can significantly impact your server performance and overall traffic.
+> 只有在需要物理效果时才使用它们，因为它们可能会对服务器性能和整体流量产生显著影响。
 > 
-> Use client side created LocalObject for static objects that don't need any physics to be synced across near players.
+> 对于不需要在附近玩家之间同步任何物理效果的静态物体，请使用客户端创建的LocalObject。
 
 [LocalObject class in JS API reference](https://docs.altv.mp/js/api/alt-client.LocalObject.html)<br>
 [LocalObject class in C# API reference](https://docs.altv.mp/cs/api/AltV.Net.Client.Elements.Entities.LocalObject.html)<br>
 
-With default server configuration, up to 120 of the closest objects are streamed at the same time. The max streaming values can be edited in the server configuration.
+在默认服务器配置下，最多同时传输最接近的120个物体。最大传输数值可以在服务器配置中进行编辑。
 
-See [server configuration](configs/server.md) [maxStreaming] section.
+参见 [服务器配置](configs/server.md) [maxStreaming] 部分。
 
 <br>
 
 > [!TIP]
-> See <a href='https://forge.plebmasters.de/objects'>Pleb Masters: Forge</a> for a full list of all objects.
+> 查看 <a href='https://forge.plebmasters.de/objects'>Pleb Masters: Forge</a> 所有对象的完整列表。
 
 ## Usage
 
@@ -27,6 +27,6 @@ See [server configuration](configs/server.md) [maxStreaming] section.
 ### Example
 
 ```js
-// Create physics synchronized soccer ball
+// 创造物理同步足球
 let object = new alt.Object("p_ld_soc_ball_01",  new alt.Vector3(0,0,70), new.alt.Vector3(0,0,0));
 ```
