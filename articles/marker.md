@@ -1,22 +1,22 @@
-# Marker API
+# 标记 API
 
-Since alt:V Update 15 there are classes for creating client side markers. These client side markers are easier to create and use, as they are automatically streamed on client side.
+自alt:V更新15以来，新增了用于创建客户端标记的类。这些客户端标记更容易创建和使用，因为它们会自动在客户端进行流式传输。
 
-Markers are symbols in 3D space that can be used to visually mark specific positions.
+标记是在3D空间中用于可视化标记特定位置的符号。
 
 > [!WARNING]
-> Nearest created markers are automatically streamed to the player as soon as they get near the defined streaming distance.
+> 最近创建的标记会在玩家靠近定义的流式传输距离时自动传输给玩家。
 > 
-> For performance reason markers are currently limited to 2000 streamed in at the same time.
+> 出于性能原因，目前标记的流式传输数量限制为最多2000个同时传输。
 
 ## Usage
 
 [Marker class in JS API reference](https://docs.altv.mp/js/api/alt-client.Marker.html)<br>
 [Marker class in C# API reference](https://docs.altv.mp/cs/api/AltV.Net.Client.Elements.Entities.Marker.html)<br>
 
-The look of an marker is defined by its type, see [MarkerTypes](https://docs.altv.mp/js/api/alt-client.MarkerType.html) for all available types.<br>
+标记的外观由其类型定义，可查看[MarkerTypes](https://docs.altv.mp/js/api/alt-client.MarkerType.html)以获取所有可用类型。<br>
 
-### Example
+### 示例
 
 <img src="https://i.imgur.com/UwdrKCf.gif">
 
@@ -26,7 +26,7 @@ const marker = new alt.Marker(29, new alt.Vector3(0, 0, 71), new alt.RGBA(0, 128
 marker.rotate = true;
 ```
 
-Example of a streamed marker which is only visible if you get in 100.0 of coordinate range.
+以下是一个示例，展示了一个只有在坐标范围内小于100.0时才可见的流式传输标记。
 
 ```js
 const marker = new alt.Marker(29, new alt.Vector3(0, 0, 71), new alt.RGBA(0, 128, 0, 255), true, 100.0);
