@@ -39,7 +39,18 @@ announceRetryErrorAttempts = 50
 # 可以使用相同 IP 地址连接的最大玩家数 
 duplicatePlayers = 4096# 定义地图边界大小 
 
-# 定义地图矩形区域大小
+# Key for shared resources. Can be used to share resources between multiple servers, so users don't have to download them separatedly
+sharedProjectKey = "altv-shared"
+# Display name for shared resources bundle (visible in alt:V client settings)
+sharedProjectName = "alt:V shared"
+
+# The amount of server side managed entities per type that can be streamed at the same time per player. If more than the set amount of entities are in streaming range, the closest n entities (as defined below) of the specific type will be streamed. Changing these values can cause performance and stability issues.
+[maxStreaming]
+peds = 128 # Max 220, shared type for server side created NPC peds + player peds
+objects = 120 # Max 120, server side created objects
+vehicles = 128  # Max 220, server side created vehicles
+
+# Define the map bound size
 mapBoundsMinX = -10000
 mapBoundsMinY = -10000
 mapBoundsMaxX = 65536
@@ -90,28 +101,34 @@ modules = [
     "csharp-module"
 ]
 
-# 仅启用特定的 DLC 包
-dlc-whitelist = [
+# If dlcWhitelist contains any dlcs, it will only enable these specific game DLCs. Useful when you want to maintain a list of 'supported' DLCs on your server because of game limits, ID shifts, etc. Below defined setting would make sure to only load the mpBeach, mpBusiness and patchday27ng R* dlc contents
+# See complete DLC list at go.altv.mp/dlc-list 
+dlcWhitelist = [
     "mpBeach",
     "mpBusiness",
     "patchday27ng"
 ]
 
-# 混淆资源名称
+# Obfuscate resource names
 hashClientResourceName = true
 
-# 扩展 GTA 池大小
+# Configure GTA game pool sizes to extend them. These game pools define the limits of certain aspects in the game, extending them can and will cause stability and performance issues. Please test changes carefully.
+# See this article for a complete list of game pools: https://docs.altv.mp/gta/articles/tutorials/overwrite_gameconfig.html
 [pools]
-"DrawableStore" = 240420
+"DrawableStore" = 240420 # Example of raised DrawableStore pool
 
 # 实体创建/流媒体系统等的分析
 [worldProfiler]
 port = 7797
 host = "0.0.0.0"
 
+# Configure the amount of threads used for different kind of processing in the alt:V server. You should in total never configure more threads than your server hardware has threads. 
+# For example, when your hardware has 12 threads, use 8 for sync send, 2 for receive and all other at 1.
 [threads]
-streamer = 1
-migration = 1
+streamer = 1 # Processing of streamed entities
+migration = 1 # Processing of netowner calculations
+syncSend = 8 # Processing of sending sync data, should be always the highest amount
+syncReceive = 2 # Processing of receiving sync data, should be around 1/4 of syncSend
 
 # js-module 相关设置
 [js-module]
@@ -125,19 +142,20 @@ profiler = true
 global-webcrypto = true
 # "https://nodejs.org/api/cli.html#--experimental-network-imports"
 network-imports = true
-# 将额外的 CLI 参数添加到节点环境"https://nodejs.org/api/cli.html"
-extra-cli-args = ["--inspect=127.0.0.1:9229", "--max-old-space-size=8192"]
-# 启用 Node.js 检查器  
+# Add extra cli arguments to the node environment "https://nodejs.org/api/cli.html"
+extra-cli-args = ["--max-old-space-size=8192"]
+# Enable node.js inspector
 [js-module.inspector]
 host = "127.0.0.1"
 port = 9229
 
-# 与csharp-module 相关的设置  
-[csharp-module] 
-# 在服务器启动时禁用依赖项(NuGet)检查和下载,如果您与NuGet服务器的连接很差(例如中国),这是很推荐的  
-disableDependencyDownload= true  
+# Settings related to c#-module
+[csharp-module]
+# Disable dependency (NuGet) check and download at server startup, this is recommended if you have a bad connection to the NuGet server (e.g china)
+disableDependencyDownload = true
 
-# 语音配置(需要设置才能启用语音聊天)
+# Voice configuration (category needs atleast to exist in configuration, to enable voice chat)
+# See this article for more info: https://docs.altv.mp/articles/voice.html
 [voice]
 # 语音服务器的比特率  
 bitrate = 64000

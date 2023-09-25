@@ -34,7 +34,8 @@ secret = 1234567890
 要集成 alt:V 服务器,只需对 server.toml 进行少量调整:
 
 ```toml
-[voice]  
+[voice]
+streamingTickRate = 10
 # 语音服务器的比特率  
 bitrate = 64000  
 # 外部服务器的密钥(仅在使用externalHost时需要)  
@@ -48,4 +49,11 @@ externalPort = 7798
 externalPublicHost = "xx.xx.xx.xx"  
 # 外部主机公共端口  
 externalPublicPort = 7799
+
+# Define the map bound size
+mapBoundsMinX = -10000
+mapBoundsMinY = -10000
+mapBoundsMaxX = 65536
+mapBoundsMaxY = 65536
+mapCellAreaSize = 100 #smaller areas uses more ram and less cpu
 ```

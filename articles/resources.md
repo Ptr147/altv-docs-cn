@@ -1,11 +1,12 @@
 # 资源
 
-资源是alt:V服务器的主要部分之一。 它们处理服务器端和客户端使用的alt:V服务器的数据和游戏脚本。资源表示为alt:V服务器根目录中的`resources/`文件夹的子文件夹。
+Resources are one of the main parts of the alt:V server. They handle the data and gamescripts for server- and clientside used by the alt:V server.<br>
+Resources are represented as a subfolder of the `resources/` folder in the alt:V server root.
 
 # resource.toml
 
-一个资源(文件夹)需要至少包含一个`resource.toml`配置文件。 根据使用的资源类型,您在配置文件中指定的属性可能会彼此不同。<br> 
-一个资源具有如下文件夹结构:
+A resource (folder) is required to contain at minimum a `resource.toml` configuration file (except rpf resources, see rpf section below for more info). Depending on which resource type you are using, the properties you specify in the config file may differ between each other.<br>
+A resource has a folder structure like this:
 
 > [!div class="nohljsln"]
 >```
@@ -34,14 +35,40 @@
 
 此资源类型用于向客户端提供修改后的内容(如车辆、MLO、服装)。您需要一个`stream.toml`来使此类型工作。
 
+Since v15 this resource type also allows to replace GTA base files. See `overrides` below.
+
 stream.toml
 
            
 |                   键                      |                                        描述                                       |  
 | :----------------------------------------: | :-----------------------------------------------------------------------------------------------------: |
-| 文件     | 要发送到客户端的文件的路径。                             |
-| 元     | 元文件和相应的数据文件的路径(格式:[PATH = DATA_FILE_TAG])。      |
+| files     | 要发送到客户端的文件的路径。                             |
+| meta     | 元文件和相应的数据文件的路径(格式:[PATH = DATA_FILE_TAG])。      |
 | gxt       | gxt文件的路径。|
+| overrides | Game file mount path and path to the replacement (Format: [MOUNT_PATH = REPLACEMENT_PATH]) |
+
+### 替换(Replacements)
+
+To override a file you need to first it's full mount path. Mount path is specified in format `group:/path/to/file`. See [list of mounts](https://gist.githubusercontent.com/martonp96/59f731446c7f17db3f400c2be458c4a4/raw/38b73edc0a61cbd24383d75a41c515718aafded6/gistfile1.txt). 
+
+Example replacement:
+
+File structure:
+> [!div class="nohljsln"]
+>```
+> resources/
+>   [RESOURCE_NAME]/
+>     replaces/
+>       water_empty.xml
+>     resource.toml
+>```
+
+stream.toml 
+> [!div class="nohljsln"]
+>```
+> [overrides]
+> 'commoncrc:/data/levels/gta5/water.xml' = 'replaces/water_empty.xml'
+> ```
 
 ## asset-pack
 
@@ -56,3 +83,22 @@ stream.toml
 > type = asset-pack
 > client-files = [ ... ]
 > ```
+
+## rpf
+
+This resource type allows you to load .rpf DLC directly. All .rpf archives are loaded before game start, and therefore can load anything what normal singleplayer DLC can.
+
+resource.toml
+
+| Key      | Description           |
+| :------: | :-------------------: |
+| type     | `rpf`                 |
+| main     | Path to the .rpf file |
+
+To simplify loading process, you can load rpf DLCs without creating `resource.toml`. Just create a resource folder and put a `dlc.rpf` file in it.
+
+Example:
+- Download https://www.gta5-mods.com/maps/community-mission-row-pd/download/75282
+- Create `server/resources/nice_police_mlo` folder
+- Copy `/RageMP and SP/mrpd/dlc.rpf` to `nice_police_mlo` folder
+- Add `nice_police_mlo` to resources list in server.toml

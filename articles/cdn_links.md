@@ -9,7 +9,7 @@ update.json 文件包含构建号,文件位置和 sha1 哈希。
 ## 链接生成器
 
 <p>您还可以使用此生成器来创建所需的链接,只需选择您需要的组件,并在需要时选择update.json的链接。 
-<div id="CDN_Link_Generator-interface" style="display: flex; justify-content: space-between; max-width: 800px;"> </div>
+<div id="CDN_Link_Generator-interface" style="display: flex; justify-content: space-between; max-width: 855px;"> </div>
 </br>
 <div id="CDN_Link_Generator-links"> </div>
 
@@ -50,6 +50,7 @@ label {
         interfaceStr += "<div><input type='checkbox' id='voice' name='voice' value='voice'><label for='voice'>voice</label></div>";
         interfaceStr += "<div><input type='checkbox' id='csharp' name='csharp' value='csharp'><label for='csharp'>csharp-module</label></div>";
         interfaceStr += "<div><input type='checkbox' id='javascript' name='javascript' value='javascript'><label for='javascript'>js-module</label></div>";
+        interfaceStr += "<div><input type='checkbox' id='javascriptv2' name='javascriptv2' value='javascriptv2'><label for='javascriptv2'>js-module-v2</label></div>";
         interfaceStr += "<div><input type='checkbox' id='js-bytecode' name='js-bytecode' value='js-bytecode'><label for='js-bytecode'>js-bytecode-module</label></div>";
         interfaceStr += "<div><input type='checkbox' id='update' name='update' value='update'><label for='update'>update.json</label></div>";
 
@@ -72,9 +73,10 @@ label {
         let voice = document.getElementById("voice").checked;
         let csharp = document.getElementById("csharp").checked;
         let javascript = document.getElementById("javascript").checked;
+        let javascriptv2 = document.getElementById("javascriptv2").checked;
         let bytecodeModule = document.getElementById("js-bytecode").checked;
 
-        document.getElementById("CDN_Link_Generator-links").innerHTML = generateLinks([server, voice, csharp, javascript, bytecodeModule],branch,os,update);
+        document.getElementById("CDN_Link_Generator-links").innerHTML = generateLinks([server, voice, csharp, javascript, javascriptv2, bytecodeModule],branch,os,update);
     }
 
     /**
@@ -101,12 +103,18 @@ label {
         if(selection[3])
             returnStr += generateJSLinks(branchIndex, osIndex, listUpdate);
 
-        if (selection[4]) {
+        if(selection[4])
+            returnStr += generateJSV2Links(branchIndex, osIndex, listUpdate);
+
+        if (selection[5]) {
             returnStr += generateJSBytecodeLinks(branchIndex, osIndex, listUpdate);
         }
 
-        if(!selection[0] && !selection[1] && !selection[2] && !selection[3] && !selection[4])
+        if(!selection[0] && !selection[1] && !selection[2] && !selection[3] && !selection[4] && !selection[5])
             returnStr += "You didn't select any components :(";
+        else if(selection[4] && (branchArray[branchIndex] === "release" || branchArray[branchIndex] === "rc"))
+            returnStr += "js-module-v2 is not ready for production. It is only available on dev branch. See https://github.com/altmp/altv-js-module-v2/tree/v1-compatibility for more information.";
+
 
         returnStr += "<\/pre>";
 
@@ -127,17 +135,20 @@ label {
             returnStr += "https://cdn.alt-mp.com/server/" + branchArray[branchIndex] + "/" + osArray[osIndex] + "/update.json</br>"
             returnStr += "https://cdn.alt-mp.com/data/" + branchArray[branchIndex] + "/update.json</br>"
 
-        if(osIndex === 0)
+        if(osIndex === 0) {
+            if(branchArray[branchIndex] == "dev" || branchArray[branchIndex] == "rc") returnStr += "https://cdn.alt-mp.com/server/" + branchArray[branchIndex] + "/" + osArray[osIndex] + "/altv-crash-handler.exe</br>"
             returnStr += "https://cdn.alt-mp.com/server/" + branchArray[branchIndex] + "/" + osArray[osIndex] + "/altv-server.exe</br>";
-        else
+        } else {
+            if(branchArray[branchIndex] == "dev" || branchArray[branchIndex] == "rc") returnStr += "https://cdn.alt-mp.com/server/" + branchArray[branchIndex] + "/" + osArray[osIndex] + "/altv-crash-handler</br>"
             returnStr += "https://cdn.alt-mp.com/server/" + branchArray[branchIndex] + "/" + osArray[osIndex] + "/altv-server</br>";
+        }
 
         returnStr += "https://cdn.alt-mp.com/data/" + branchArray[branchIndex] + "/data/vehmodels.bin</br>";
         returnStr += "https://cdn.alt-mp.com/data/" + branchArray[branchIndex] + "/data/vehmods.bin</br>"
         returnStr += "https://cdn.alt-mp.com/data/" + branchArray[branchIndex] + "/data/clothes.bin</br>"
         returnStr += "https://cdn.alt-mp.com/data/" + branchArray[branchIndex] + "/data/pedmodels.bin</br>"
 
-        if (branchArray[branchIndex] == "dev") {
+        if (branchArray[branchIndex] == "dev" || branchArray[branchIndex] == "rc") {
             returnStr += "https://cdn.alt-mp.com/data/" + branchArray[branchIndex] + "/data/rpfdata.bin</br>"
             returnStr += "https://cdn.alt-mp.com/data/" + branchArray[branchIndex] + "/data/weaponmodels.bin</br>"
         }
@@ -222,6 +233,39 @@ label {
      * @param {boolean} listUpdate
      * @returns {string}
      */
+    function generateJSV2Links(branchIndex, osIndex, listUpdate)
+    {
+        let returnStr = "";
+
+        if(listUpdate) {
+            if(branchArray[branchIndex] == "dev") returnStr += "https://cdn.alt-mp.com/js-module-v2/" + branchArray[branchIndex] + "/" + osArray[osIndex] + "/update.json</br>";
+        }
+
+        if(osIndex === 0)
+        {
+            if(branchArray[branchIndex] == "dev") returnStr += "https://cdn.alt-mp.com/js-module-v2/" + branchArray[branchIndex] + "/" + osArray[osIndex] + "/libnodev2.dll</br>";
+        } else {
+            if(branchArray[branchIndex] == "dev") returnStr += "https://cdn.alt-mp.com/js-module-v2/" + branchArray[branchIndex] + "/" + osArray[osIndex] + "/libnodev2.so</br>";
+        }
+
+        if(osIndex === 0) {
+            if(branchArray[branchIndex] == "dev") {
+                returnStr += "https://cdn.alt-mp.com/js-module-v2/" + branchArray[branchIndex] + "/" + osArray[osIndex] + "/modules/js-module-v2.dll</br>";
+                returnStr += "https://cdn.alt-mp.com/js-module-v2/" + branchArray[branchIndex] + "/" + osArray[osIndex] + "/modules/js-module-v2.pdb</br>";
+            }
+        } else {
+            if(branchArray[branchIndex] == "dev") returnStr += "https://cdn.alt-mp.com/js-module-v2/" + branchArray[branchIndex] + "/" + osArray[osIndex] + "/libjs-module-v2.so</br>";
+        }
+
+        return returnStr;
+    }
+
+    /**
+     * @param {number} branchIndex
+     * @param {number} osIndex
+     * @param {boolean} listUpdate
+     * @returns {string}
+     */
     function generateJSBytecodeLinks(branchIndex, osIndex, listUpdate)
     {
         let returnStr = "";
@@ -256,6 +300,14 @@ JS 模块
 >https://cdn.alt-mp.com/js-module/${BRANCH}/x64_linux/modules/js-module/libnode.so.108
 >```
 
+JS Module V2
+> [!div class="nohljsln"]
+>```yaml
+>https://cdn.alt-mp.com/js-module-v2/${BRANCH}/x64_linux/update.json
+>https://cdn.alt-mp.com/js-module-v2/${BRANCH}/x64_linux/libjs-module-v2.so
+>https://cdn.alt-mp.com/js-module-v2/${BRANCH}/x64_linux/libnodev2.so
+>```
+
 JS Bytecode 字节码 模块
 > [!div class="nohljsln"]
 >```yaml
@@ -275,6 +327,7 @@ JS Bytecode 字节码 模块
 >```yaml
 >https://cdn.alt-mp.com/server/${BRANCH}/x64_linux/update.json
 >https://cdn.alt-mp.com/server/${BRANCH}/x64_linux/altv-server
+>https://cdn.alt-mp.com/server/${BRANCH}/x64_linux/altv-crash-handler
 >https://cdn.alt-mp.com/data/${BRANCH}/update.json
 >https://cdn.alt-mp.com/data/${BRANCH}/data/vehmodels.bin
 >https://cdn.alt-mp.com/data/${BRANCH}/data/vehmods.bin
@@ -310,6 +363,15 @@ JS 模块
 >https://cdn.alt-mp.com/js-module/${BRANCH}/x64_win32/modules/js-module/libnode.dll
 >```
 
+JS Module V2
+> [!div class="nohljsln"]
+>```yaml
+>https://cdn.alt-mp.com/js-module-v2/${BRANCH}/x64_win32/update.json
+>https://cdn.alt-mp.com/js-module-v2/${BRANCH}/x64_win32/modules/js-module-v2.dll
+>https://cdn.alt-mp.com/js-module-v2/${BRANCH}/x64_win32/modules/js-module-v2.pdb
+>https://cdn.alt-mp.com/js-module-v2/${BRANCH}/x64_win32/libnodev2.dll
+>```
+
 JS Bytecode 字节码 模块
 > [!div class="nohljsln"]
 >```yaml
@@ -329,6 +391,7 @@ JS Bytecode 字节码 模块
 >```yaml
 >https://cdn.alt-mp.com/server/${BRANCH}/x64_win32/update.json
 >https://cdn.alt-mp.com/server/${BRANCH}/x64_win32/altv-server.exe
+>https://cdn.alt-mp.com/server/${BRANCH}/x64_win32/altv-crash-handler.exe
 >https://cdn.alt-mp.com/data/${BRANCH}/update.json
 >https://cdn.alt-mp.com/data/${BRANCH}/data/vehmodels.bin
 >https://cdn.alt-mp.com/data/${BRANCH}/data/vehmods.bin
