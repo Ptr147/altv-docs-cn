@@ -1,72 +1,72 @@
-# Virtual Entity API
+# 虚拟实体 API
 
-In alt:V Update 15 we have added the virtual entity API. It provides you an easy way to synchronize your own entities, for example take a look at [this demo](https://discord.com/channels/371265202378899476/384874419446743041/1106288579598110741), fire particles there are virtual entities.
+在alt:V更新15中，我们添加了虚拟实体API。它为您提供了一种简单的方式来同步您自己的实体，例如查看[此演示](https://discord.com/channels/371265202378899476/384874419446743041/1106288579598110741)，其中的火粒子是虚拟实体。
 
-## Usage
+## 用法
 
-Server Side
+服务端
 
 [VirtualEntity class in JS API reference](https://docs.altv.mp/js/api/alt-server.VirtualEntity.html)<br>
 [VirtualEntityGroup class in JS API reference](https://docs.altv.mp/js/api/alt-server.VirtualEntityGroup.html)<br>
 [VirtualEntity class in C# API reference](https://docs.altv.mp/cs/api/AltV.Net.Elements.Entities.VirtualEntity.html)<br>
 [VirtualEntityGroup class in C# API reference](https://docs.altv.mp/cs/api/AltV.Net.Elements.Entities.VirtualEntityGroup.html)<br>
 
-Client Side
+客户端
 
 [VirtualEntity class in JS API reference](https://docs.altv.mp/js/api/alt-client.VirtualEntity.html)<br>
 [VirtualEntityGroup class in JS API reference](https://docs.altv.mp/js/api/alt-client.VirtualEntityGroup.html)<br>
 [VirtualEntity class in C# API reference](https://docs.altv.mp/cs/api/AltV.Net.Client.Elements.Entities.VirtualEntity.html)<br>
 [VirtualEntityGroup class in C# API reference](https://docs.altv.mp/cs/api/AltV.Net.Client.Elements.Entities.VirtualEntityGroup.html)<br>
 
-API consists of two classes: group and entity.<br>
+该API由两个类组成：group和entity。<br>
 
-- Group is necessary to set the max number of entities per player stream.<br>
-- Entity is assigned to a group.<br>
+- Group用于设置每个玩家流的实体的最大数量。<br>
+- Entity被分配到一个组中。<br>
 
-### What is "max number of entities per player stream"?<br>
+### 什么是“每个玩家流的最大实体数”?<br>
 
-Consider an example: we have balls as virtual entities, there are 100 virtual entities around the player in the game, if we set max number of entities to 3, the player will only see 3 closest.
+举个例子：我们有球作为虚拟实体，在游戏中玩家周围有100个虚拟实体。如果我们将最大实体数量设置为3，玩家将只看到最接近的3个。
 
 <img src="https://i.imgur.com/yUZKwQQ.png" width="400px"/>
 
-Yellow balls are virtual entities that are streamed to the player.<br>
-Green circle is streaming range of balls (in this example, all balls have the same streaming distance).<br>
-Blue arrow is streaming distance.
+黄色球是对玩家进行流式传输的虚拟实体。<br>
+绿色圆圈表示球的流式传输范围（在这个例子中，所有球的流式传输距离相同）。<br>
+蓝色箭头表示流式传输距离。
 
-### Example
+### 示例
 
-In this example, we are going to synchronize the Casino Lucky Wheel. We'll do this using the JavaScript API.
+在这个例子中，我们将使用JavaScript API来同步赌场幸运轮。
 
 Server
 
 ```js
 import alt from 'alt-server'
 
-// There can only be one lucky wheel on the server
+// 服务器上只能有一个幸运轮。
 const maxEntitiesInStream = 1
 
 const luckyWheelGroup = new alt.VirtualEntityGroup(maxEntitiesInStream)
 
 const pos = new alt.Vector3(0, 5, 72)
 const streamingDistance = 100
-// Initial stream synced meta
+// 初始流同步元数据
 const initialData = {
-    // Most likely in your gamemode you will create different types of virtual entities
+    // 在您的游戏模式中，很可能会创建不同类型的虚拟实体。
     type: 'luckyWheel',
 }
 const entity = new alt.VirtualEntity(luckyWheelGroup, pos, streamingDistance, initialData)
 
-// Spinning wheel every 5 seconds
+// 每5秒旋转一次
 alt.setInterval(async () => {
     entity.setStreamSyncedMeta('spinStartTime', alt.getNetTime())
     await alt.Utils.wait(2000)
     entity.deleteStreamSyncedMeta('spinStartTime')
 }, 5_000)
 
-// We can also set dimension if needed
+// 如果需要，我们也可以设置维度。
 // entity.dimension = 123
 
-// Or hide entity from all players
+// 或者隐藏实体，使其对所有玩家不可见。
 // entity.visible = false
 ```
 
@@ -81,10 +81,10 @@ let luckyWheelObject = null
 let currentSpinTick = null
 
 const isItLuckyWheel = (object) => {
-    // If its not virtual entity ignore it
+    // 如果它不是虚拟实体，则忽略它
     if (!(object instanceof alt.VirtualEntity)) return false
 
-    // Initial stream synced meta we set on server
+    // 我们在服务器上设置的初始流同步元数据
     if (object.getStreamSyncedMeta('type') !== 'luckyWheel') return false
 
     return true
@@ -96,7 +96,7 @@ const startSpin = (startSpinTime) => {
     currentSpinTick = new alt.Utils.EveryTick(() => {
         const currentSpinTime = (alt.getNetTime() - startSpinTime)
 
-        // Spin is already over
+        // 旋转已经结束了
         if (currentSpinTime > 2000) {
             currentSpinTick.destroy()
             currentSpinTick = null
@@ -117,7 +117,7 @@ alt.on('worldObjectStreamIn', (object) => {
 
     alt.log('Lucky wheel stream in')
 
-    // Make sure we don't have object already created
+    // 确保我们没有创建对象
     alt.Utils.assert(luckyWheelObject == null)
 
     const rot = alt.Vector3.zero
@@ -142,20 +142,20 @@ alt.on('worldObjectStreamOut', (object) => {
 alt.on('streamSyncedMetaChange', (object, key, value) => {
     if (!isItLuckyWheel(object)) return
 
-    // Make sure we have object created
+    // 确保我们已经创建了对象
     alt.Utils.assert(luckyWheelObject != null)
 
     alt.log('Lucky wheel change', { key: value })
 
     switch (key) {
         case 'spinStartTime':
-            // Value was deleted
+            // 值被删除
             if (value == null) return
 
             startSpin(value)
             break
         case 'type':
-            // ignoring it
+            // 忽略
             break
         default:
             alt.logError('Lucky wheel unknown stream synced meta change key:', key)
