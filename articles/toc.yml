@@ -57,27 +57,27 @@
   href: discord_oauth.md
 - name: 元数据
   href: meta_data.md  
-- name: Audio API
+- name: 音频 API
   href: audio.md
-- name: Audio filters
+- name: 音频过滤器
   href: audio_filters.md
-- name: Voice
+- name: 语音
   href: voice.md
 - name: 外部语音服务器
   href: external_voice_server.md
 - name: Cloud Auth
   href: cloud_auth.md
-- name: Object API
+- name: 对象 API
   href: object.md
 - name: Ped API
   href: ped.md
-- name: Text Labels API
+- name: 文本标签 API
   href: textlabel.md
-- name: Markers API
+- name: 标记 API
   href: marker.md
-- name: Checkpoint API
+- name: 检查点 API
   href: checkpoint.md
-- name: Virtual Entity API
+- name: 虚拟实体 API
   href: virtualentity.md
 - name: RmlUi
   href: rmlui/index.md
