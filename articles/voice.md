@@ -1,8 +1,8 @@
-# Voice API
+# 语音 API
 
-alt:V comes with an built-in voice chat. In order to enable it, you need to create `voice` category in your `server.toml`. It can be empty for default voice settings.
+alt:V内置了语音聊天功能。要启用它，您需要在`server.toml`中创建`voice`类别。它可以为空以使用默认语音设置。
 
-For example:
+例如:
 > [!div class="nohljsln"]
 > ```toml
 > name = "My awesome server"
@@ -10,38 +10,38 @@ For example:
 > [voice]
 > ```
 
-## Voice channels
+## 语音频道
 
 [VoiceChannel class in JS API reference](https://docs.altv.mp/js/api/alt-client.VoiceChannel.html)<br>
 [VoiceChannel class in C# API reference](https://docs.altv.mp/cs/api/AltV.Net.Elements.Entities.VoiceChannel.html)<br>
 
-To allow players to hear eachother you need to create a voice channel and add the players that should hear each other there.
+要允许玩家彼此听到声音，您需要创建一个语音频道并将应该彼此听到的玩家添加到该频道中。
 
-If two players are in two different voice channels at the same time, category will be decided by `channel.priority`. If two channels are of same priority, non-spatial (2D) voice is selected.
+如果两个玩家同时处于两个不同的语音频道中，则类别将由`channel.priority`决定。如果两个频道具有相同的优先级，则选择非空间（2D）语音。
 
-### VoiceChannel constructor
+### VoiceChannel 构造函数
 
-The VoiceChannel class takes two arguments in it's constructor:
-- `isSpatial` - is voice spatial (3D position based voice), setting false is useful for e.g. phone calls where exact position doesnt matter
-- `maxDistance` - maximum distance at which player can be heard, set 0 for non-spatial voice
+VoiceChannel类的构造函数中有两个参数:
+- `isSpatial` - 语音是否空间感知（基于3D位置的声音），将其设置为false对于例如电话通话等不需要精确位置的情况很有用。
+- `maxDistance` - 玩家能被听到的最大距离，设为0以使用非空间声音。
 
 
-### Audio filters
+### 音频过滤器
 
-You can apply audio filters to a voice channel object.
+您可以将音频过滤器应用于语音通道对象。
 
-See [Audio filters](audio_filters.md) for more info.
+查看 [音频过滤器](audio_filters.md) 获得更多信息。
 
 ```js
 const voice = new alt.VoiceChannel(true, 15);
 voice.filter = alt.hash('walkietalkie');
 ```
 
-### Audio categories
+### 音频分类
 
-You can set a custom audio category to a voice channel. In order to do that, you need to create an audio filter and set category on it.
+您可以将自定义音频类别设置为语音通道。为此，您需要创建一个音频过滤器并在其上设置类别。
 
-See [Audio filters](audio_filters.md), audio category section for more info.
+查看 [音频过滤器](audio_filters.md), 音频类别部分更多信息。
 
 ### Example
 

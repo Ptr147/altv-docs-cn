@@ -1,27 +1,27 @@
 # Ped API
 
-Since alt:V Update 15 you are able to create server side streamed & synchronized peds, often also referred as NPCs. These server side created peds can be controlled by assigning tasks to them on client side, which will then automatically be in sync with all players near.
+自alt:V更新15以来，您可以创建服务器端流式传输并同步的行人，通常也称为NPC。这些在服务器端创建的行人可以通过在客户端分配任务来控制，然后会自动与附近的所有玩家同步。
 
 > [!WARNING]
-> These peds won't move and drive on their own, they need tasks assigned on client side to actually do something.
-> For GTA Online similar behaviour, you will have to implement the logic on your own.
+> 这些行人不会自行移动和驾驶，它们需要在客户端分配任务才能实际执行某些操作。
+> 对于类似GTA Online的行为，您将需要自行实现逻辑。
 
-Use the convenient LocalPed class for spawning streamed client side only peds, that other players won't see.
+使用便捷的LocalPed类来生成仅在客户端流式传输的行人，其他玩家不会看到。
 
 [LocalPed class in JS API reference](https://docs.altv.mp/js/api/alt-client.LocalPed.html)<br>
 [LocalPed class in C# API reference](https://docs.altv.mp/cs/api/AltV.Net.Client.Elements.Entities.LocalPed.html)<br>
 
-With default server configuration, up to 128 of the closest peds are streamed at the same time. The max streaming values can be edited in the server configuration.
+在默认服务器配置下，最多同时传输最接近的128个行人。最大传输数值可以在服务器配置中进行编辑。
 
 > [!WARNING]
-> Streamer entity pool of peds is the same used for streaming players. Regardless whether a ped is a NPC or player, the closest one will be streamed first.
+> 行人的流式实体池与用于流式传输玩家的相同。无论是NPC还是玩家，最接近的行人将首先进行流式传输。
 
-See [server configuration](configs/server.md) [maxStreaming] section.
+参见 [服务器配置](configs/server.md) [maxStreaming] 部分。
 
 <br>
 
 > [!TIP]
-> See <a href='https://forge.plebmasters.de/peds'>Pleb Masters: Forge</a> for a full list of all peds.
+> 参见 <a href='https://forge.plebmasters.de/peds'>Pleb Masters: Forge</a> 所有行人列表。
 
 ## Usage
 
@@ -31,11 +31,11 @@ See [server configuration](configs/server.md) [maxStreaming] section.
 ### Example
 
 ```js
-// Create server side synced ped looking like a cow
+// 创建服务器端同步，看起来像一头牛
 let ped = new alt.Ped("A_C_Cow", new alt.Vector3(0, 0, 70), new alt.Vector3(0, 0, 0));
 ```
 
-To assign tasks, you'll need to apply them on the client side of the NetOwner.
+要分配任务，您需要在NetOwner的客户端进行应用。
 
 ```js
 // server side
@@ -43,7 +43,7 @@ ped.netOwner.emit("ped_task", ped);
 
 // client side
 alt.onServer("ped_task", (ped) => {
-   // Make the specified ped roam within a 10-meter radius of the given coordinates. It will always move to a random location inside the radius, while waiting a minimum of 2 and maximum of 10 seconds before moving.
+   // 让指定的ped在给定坐标的10米半径内漫游。它将始终移动到半径内的随机位置，同时在移动前至少等待2秒，最多等待10秒。
    natives.taskWanderInArea(ped, 0, 0, 70, 10, 2, 10);
 });
 ```
