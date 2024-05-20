@@ -28,9 +28,12 @@ alt:V 服务器有针对 Linux 的本地构建,但是客户端本身没有官方
 
 ## 我如何获得 Masterlist 的令牌?
 
-您需要向 discord 机器人 Master-Bot#3667 发送消息"token"。  
-您需要在我们的 [Discord](https://discord.altv.mp/) 上至少 31 天。
+您需要登录 [Server Manager]（https://my.alt-mp.com），在其中创建服务器，并从 “Private token”（私人令牌）块中复制令牌。
 
 ## 开发 alt:V 需要令牌吗?
 
-不,开发 alt:V 不需要令牌,令牌只需要在 Masterlist 上宣布您的服务器。
+不，在 alt:V 上开发不需要令牌，只有在 Masterlist 上公布服务器或测试云认证时才需要令牌。
+
+## 我的盗版游戏副本和 alt:V 存在问题？
+
+我们不支持盗版游戏。您可以在 Steam、Epic Games 或 Rockstar Games Launcher 等游戏商店购买正版。

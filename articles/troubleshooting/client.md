@@ -67,8 +67,14 @@
 2. 转到"键盘/鼠标"设置  
 3. 将"鼠标输入方法"更改为"原始输入"   
 
-#### 网页视图滞后
-这可以减少网页视图的性能,但可能可以修复输入滞后:
+#### 移动光标时，Webview 元素跳来跳去
+如果您使用的是 Radeon 显卡，并且遇到此问题，则可能是 Radeon Boost 导致的。
+
+1. 打开 Radeon 设置
+2. 禁用 "Radeon Boost
+
+#### Webview 滞后
+这可能会降低网络视图性能，但可以解决输入延迟问题：
 
 1. 在键盘上按"Windows + R"  
 2. 在出现的窗口中输入"ms-settings:display-advancedgraphics"  
@@ -185,11 +191,70 @@ NVIDIA Display Container LS
 2. 删除缓存文件夹  
 3. 重新连接到服务器  
 
-###### Firefox  
-1. 按菜单按钮(汉堡菜单)  
-2. 选择"选项"  
-3. 在左侧选择"常规"  
-4. 滚动到"文件和应用程序"  
-5. 在"应用程序"部分选择"altv"条目  
-6. 在"操作"列中选择"总是询问"  
-7. 下次启动时,将询问您是否要使用新条目。
+###### Firefox
+1. 按下菜单按钮（汉堡菜单）
+2. 选择 ”选项
+3. 选择左侧的 ”常规
+4. 滚动到 “文件和应用程序” 5.
+5. 在 “应用程序 ”部分选择 “altv ”条目
+6. 在 “操作 ”栏中选择 “总是询问” 7.
+7. 7. 下次系统会询问您是否要使用新条目。
+
+#### 语音系统无法工作
+如果语音系统出现问题，例如更换了输入或输出设备，或者无法说话。请尝试以下步骤。
+1. 禁用所有音频输入和输出，需要的除外 
+  (设置 -> 系统 -> 声音 -> 更多声音设置 -> 右键单击 -> 禁用) 2.
+2. 卸载音频设备（设备管理器 -> 输入 -> 选择设备）并重启电脑
+3. 卡巴斯基或其他 AV 程序出现问题。禁用您的 AV 程序并重试。有效吗？那就为 alt:V 创建一个排除项。
+
+### 快速链接
+
+这里有几个链接，可以在 alt:V 启动器上执行预定义的操作。\
+有关所做工作的详细信息，请参见以下列表:
+
+| Link                                                      | Target                          | Description                                                         |
+|-----------------------------------------------------------|---------------------------------|---------------------------------------------------------------------|
+| [Open game directory](altv://action/open/game)            | `altv://action/open/game`       | Opens the game directory                                            |
+| [Open alt:V directory](altv://action/open/altv)           | `altv://action/open/altv`       | Opens the alt:V directory                                           |
+| [Open logs directory](altv://action/open/logs)            | `altv://action/open/logs`       | Opens the logs directory                                            |
+| [Open crashdump directory](altv://action/open/crashdumps) | `altv://action/open/crashdumps` | Opens the crashdumps directory                                      |
+| [Open mods directory](altv://action/open/mods)            | `altv://action/open/mods`       | Opens the mods directory                                            |
+| [Open configuration file](altv://action/open/config)      | `altv://action/open/config`     | Opens the altv.toml                                                 |
+| [Create report](altv://action/report)                     | `altv://action/report`          | Creates a report zip (containing log files) and saves it to desktop |
+| [Copy latest crashdump id](altv://action/crashdumpid)     | `altv://action/crashdumpid`     | Copies the latest crashdump id to clipboard                         |
+
+### Configuration settings
+
+#### runasAdmin
+
+| Link                                             | Target                                  | Description                                               |
+|--------------------------------------------------|-----------------------------------------|-----------------------------------------------------------|
+| [Enable](altv://action/setcfg?runasAdmin=true)   | `altv://action/setcfg?runasAdmin=true`  | Automatically elevates alt:V to administrator permissions |
+| [Disable](altv://action/setcfg?runasAdmin=false) | `altv://action/setcfg?runasAdmin=false` | Disables the automatic elevation                          |
+
+#### textureBudgetPatch
+
+| Link                                                     | Target                                          | Description                       |
+|----------------------------------------------------------|-------------------------------------------------|-----------------------------------|
+| [Enable](altv://action/setcfg?textureBudgetPatch=true)   | `altv://action/setcfg?textureBudgetPatch=true`  | Enables the texture budget patch  |
+| [Disable](altv://action/setcfg?textureBudgetPatch=false) | `altv://action/setcfg?textureBudgetPatch=false` | Disables the texture budget patch |
+
+#### useSharedTextures
+
+| Link                                                    | Target                                         | Description                         |
+|---------------------------------------------------------|------------------------------------------------|-------------------------------------|
+| [Enable](altv://action/setcfg?useSharedTextures=true)   | `altv://action/setcfg?useSharedTextures=true`  | Enables the use of shared textures  |
+| [Disable](altv://action/setcfg?useSharedTextures=false) | `altv://action/setcfg?useSharedTextures=false` | Disables the use of shared textures |
+
+#### enableDiscordOverlay
+
+| Link                                                       | Target                                            | Description                  |
+|------------------------------------------------------------|---------------------------------------------------|------------------------------|
+| [Enable](altv://action/setcfg?enableDiscordOverlay=true)   | `altv://action/setcfg?enableDiscordOverlay=true`  | Enables the discord overlay  |
+| [Disable](altv://action/setcfg?enableDiscordOverlay=false) | `altv://action/setcfg?enableDiscordOverlay=false` | Disables the discord overlay |
+
+### Fixes
+
+| Link                                                      | Target                            | Description                                                 |
+|-----------------------------------------------------------|-----------------------------------|-------------------------------------------------------------|
+| [Fix compatibility mode](altv://action/fix/compatibility) | `altv://action/fix/compatibility` | Removes compatibility settings from GTA & alt:V executables |

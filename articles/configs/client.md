@@ -4,30 +4,37 @@
 
 ## 可能的客户端配置列表  
 
-| 键                       |  类型                 |  默认值               |  描述                     |
-| ---                       | ---                    | ---                  | ---                        |
-|   name                    |   string               |   alt:V 昵称         | 在服务器上显示的您的名称。               |  
-|   branch                  |   string               |   release            | 客户端将运行的[分支](~/articles/branches.md)。 |
-|   build                   |   number               |   789                | 客户端将使用此分支的构建(通常由客户端自动生成)。   |
-|   debug                   |   boolean (true/false) |   false              | 激活调试模式。例如,活动的调试模式启用调试控制台(通过 F8 访问)并允许您在控制台中使用 `reconnect` 命令。  |
-|   gtapath                 |   string               |   -                  | 指向您的 GTA5 目录的路径。通常,它是通过安装过程自动设置的。 |  
-|   lang                    |   string               |   en                 | 您客户端的语言。      |  
-|   lastip                  |   string               |   0.0.0.0 (IPv4)     | 您最后玩的服务器的 IP 地址。 | 
-|   netgraph                |   boolean(true/false)  |   false              | 在左下角显示网格图。   |
-|   streamerMode            |   boolean(true/false)  |   false              | 启用或禁用[流媒体模式](~/articles/streamermode.md)。 | 
-|   useExternalConsole      |   boolean(true/false)  |   false              | 启用或禁用外部控制台(控制台弹出)。  |
-|   voiceActivationKey      |   number               |   78 (N)             | 设置按下说话键。您可以在[这里](https://keycode.info/)获取键代码。|
-|   voiceActivationEnabled  |   boolean(true/false)  |   false              | 启用或禁用语音活动输入模式。     |
-|   voiceInputSensitivity   |   number               |   20                 | 如果启用 voiceActivationEnabled,此选项将设置所需的敏感度。   |
-|   voiceEnabled            |   boolean(true/false)  |   true               | 为客户端启用或禁用语音系统。     |
-|   voiceAutoInputVolume    |   boolean(true/false)  |   true               | 启用或禁用自动确定输入音量。     |
-|   voiceInputVolume        |   number               |   100                | 设置输入音量(范围:0 - 200)。  |  
-|   voiceNoiseSuppression   |   boolean(true/false)  |   true               | 启用或禁用噪音抑制。         |
-|   voiceVolume             |   number               |   100                | 设置输出音量(范围:0 - 200)。 |
-|   earlyAuthTestURL        |   string               |   -                  | 指向您的提前认证网站的 URL。仅在 rc 和 dev 分支中可用。 |
-|   gameTimeout             |   number               |   60                 | 启动器应等待 GTA V 启动的最大时间(以秒为单位)。   |
-
-## 示例文件 altv.toml 
+| Key                       | Type                  | Default Value        | Description                                                                                                                                                                                                                               |
+| ---                       | ---                   | ---                  |-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|   name                    |   string              |   alt:V nickname     | Your name that is displayed on a server.                                                                                                                                                                                                  |
+|   branch                  |   string              |   release            | The [branch](~/articles/branches.md) on which the client will work.                                                                                                                                                                       | 
+|   debug                   |   boolean (true/false)|   false              | Activates the debug mode. For example, an active debug mode allows you to use the `reconnect` command in the F8 console.                                                                    |
+|   gtapath                 |   string              |   -                  | Path to your GTA5 directory. Usually, it is set up automatically thought the installation process.                                                                                                                                        |
+|   lang                    |   string              |   en                 | Language of your client.                                                                                                                                                                                                                  |
+|   lastip                  |   string              |   0.0.0.0 (IPv4)     | The ip of the last server you played on.                                                                                                                                                                                                  |
+|   netgraph                |   boolean(true/false) |   false              | Shows a netgraph on the bottom left.                                                                                                                                                                                                      |
+|   streamerMode            |   boolean(true/false) |   false              | Enables or disables the [streamer mode](~/articles/streamermode.md).                                                                                                                                                                      |
+|   textureBudgetPatch      |   boolean(true/false) |   true               | Enable or disable the texture budget patch                                                                                                                                                                                                |
+|   useSharedTextures       |   boolean(true/false) |   true               | Enable or disable the shared textures (Hardware Acceleration for CEF)                                                                                                                                                                     |
+|   useExternalConsole      |   boolean(true/false) |   false              | Enables or disables the external console (console popout).                                                                                                                                                                                |
+|   voiceActivationKey      |   number              |   78 (N)             | Sets the key for Push-to-talk. You can get the key code [here](https://keycode.info/).                                                                                                                                                    |
+|   voiceActivationEnabled  |   boolean(true/false) |   false              | Enables or disables the voice activity input mode.                                                                                                                                                                                        |
+|   voiceInputSensitivity   |   number              |   20                 | If voiceActivationEnabled is enabled, this option will set the required sensitivity.                                                                                                                                                      |
+|   voiceEnabled            |   boolean(true/false) |   true               | Enables or disables the voice system for the client.                                                                                                                                                                                      |
+|   voiceAutoInputVolume    |   boolean(true/false) |   true               | Enables or disables the automatic determination of the input volume.                                                                                                                                                                      |
+|   voiceInputVolume        |   number              |   100                | Sets the input volume (Range: 0 - 200).                                                                                                                                                                                                   |
+|   voiceNoiseSuppression   |   boolean(true/false) |   true               | Enables or disables the noise suppression.                                                                                                                                                                                                |
+|   voiceVolume             |   number              |   100                | Sets the output volume (Range: 0 - 200).                                                                                                                                                                                                  |
+|   earlyAuthTestURL        |   string              |   -                  | URL to your early auth website. Only usable in rc & dev branch.                                                                                                                                                                           |
+|   gameTimeout             |   number              |   60                 | Maximum time (in seconds) the launcher should wait for GTA V to start.                                                                                                                                                                    |
+|   logsToKeep              |   number              |   10                 | How many client & launcher logs should be kept until rotation starts.                                                                                                                                                                     |
+|   heapSize                |   number              |   1024               | The default memory size for the texture/asset VRAM budget limit (auto calculated from your pc specs)                                                                                                                                      |
+|   linuxCompatibility      |   boolean(true/false) |   false              | Enable or disables Linux/MacOS related settings (See Discord #general [Linux](https://discord.com/channels/371265202378899476/988474811258908702) & [MacOS](https://discord.com/channels/371265202378899476/1105208952091840612) Threads) |
+|   discordRichPresence     |   boolean(true/false) |   true               | Enable or Disable the Discord Rich Presence ("Now Playing" alt:V in Discord user profile)                                                                                                                                                 |
+|   enableModDirectory      |   boolean(true/false) |   false              | Enables the mod directory. See [here](~/articles/troubleshooting/client-mods.md) for more info.                                                                                                                                           |
+|   cachePath               |         string        |   "cache" directory in client folder | Changes location of the cache directory where server assets (interiors, scripts, etc.) are being downloaded to.                                                                                               |
+|   skipCustomModuleWarning |   boolean(true/false) |   false              | Skips "Do you want to load [module name]?" confirmation window. See [SDK](https://docs.altv.mp/sdk/index.html) for more info. |
+## Example altv.toml file
 
 ```toml
 branch = "release"

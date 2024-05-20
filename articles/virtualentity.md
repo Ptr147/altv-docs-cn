@@ -40,125 +40,125 @@
 Server
 
 ```js
-import alt from 'alt-server'
+import alt from 'alt-server';
 
-// 服务器上只能有一个幸运轮。
-const maxEntitiesInStream = 1
+// 服务器上只能有一个幸运转盘
+const maxEntitiesInStream = 1;
 
-const luckyWheelGroup = new alt.VirtualEntityGroup(maxEntitiesInStream)
+const luckyWheelGroup = new alt.VirtualEntityGroup(maxEntitiesInStream);
 
-const pos = new alt.Vector3(0, 5, 72)
-const streamingDistance = 100
+const pos = new alt.Vector3(0, 5, 72);
+const streamingDistance = 100;
 // 初始流同步元数据
 const initialData = {
     // 在您的游戏模式中，很可能会创建不同类型的虚拟实体。
     type: 'luckyWheel',
-}
-const entity = new alt.VirtualEntity(luckyWheelGroup, pos, streamingDistance, initialData)
+};
+const entity = new alt.VirtualEntity(luckyWheelGroup, pos, streamingDistance, initialData);
 
 // 每5秒旋转一次
 alt.setInterval(async () => {
-    entity.setStreamSyncedMeta('spinStartTime', alt.getNetTime())
-    await alt.Utils.wait(2000)
-    entity.deleteStreamSyncedMeta('spinStartTime')
-}, 5_000)
+    entity.setStreamSyncedMeta('spinStartTime', alt.getNetTime());
+    await alt.Utils.wait(2000);
+    entity.deleteStreamSyncedMeta('spinStartTime');
+}, 5_000);
 
-// 如果需要，我们也可以设置维度。
-// entity.dimension = 123
+// 如果需要，我们还可以设置维度
+// entity.dimension = 123；
 
-// 或者隐藏实体，使其对所有玩家不可见。
-// entity.visible = false
+// 或者对所有玩家隐藏实体
+// entity.visible = false；
 ```
 
 Client
 
 ```js
-import alt from 'alt-client'
+import alt from 'alt-client';
 
 // alt.LocalObject or null
-let luckyWheelObject = null
+let luckyWheelObject = null;
 // alt.Utils.EveryTick or null
-let currentSpinTick = null
+let currentSpinTick = null;
 
 const isItLuckyWheel = (object) => {
     // 如果它不是虚拟实体，则忽略它
-    if (!(object instanceof alt.VirtualEntity)) return false
+    if (!(object instanceof alt.VirtualEntity)) return false;
 
-    // 我们在服务器上设置的初始流同步元数据
-    if (object.getStreamSyncedMeta('type') !== 'luckyWheel') return false
+    // 我们在服务器上设置的初始数据流同步元
+    if (object.getStreamSyncedMeta('type') !== 'luckyWheel') return false;
 
-    return true
-}
+    return true;
+};
 
 const startSpin = (startSpinTime) => {
-    alt.log('Lucky wheel start spin time:', startSpinTime)
+    alt.log('Lucky wheel start spin time:', startSpinTime);
 
     currentSpinTick = new alt.Utils.EveryTick(() => {
-        const currentSpinTime = (alt.getNetTime() - startSpinTime)
+        const currentSpinTime = (alt.getNetTime() - startSpinTime);
 
         // 旋转已经结束了
         if (currentSpinTime > 2000) {
-            currentSpinTick.destroy()
-            currentSpinTick = null
+            currentSpinTick.destroy();
+            currentSpinTick = null;
 
-            luckyWheelObject.rot = new alt.Vector3(0, 0, 0)
-            return
+            luckyWheelObject.rot = alt.Vector3.zero;
+            return;
         }
 
-        let currentNormalized = currentSpinTime / 2000
-        let degrees = currentNormalized * 360
+        let currentNormalized = currentSpinTime / 2000;
+        let degrees = currentNormalized * 360;
 
-        luckyWheelObject.rot = new alt.Vector3(0, degrees, 0).toRadians()
+        luckyWheelObject.rot = new alt.Vector3(0, degrees, 0).toRadians();
     })
 }
 
 alt.on('worldObjectStreamIn', (object) => {
-    if (!isItLuckyWheel(object)) return
+    if (!isItLuckyWheel(object)) return;
 
-    alt.log('Lucky wheel stream in')
+    alt.log('Lucky wheel stream in');
 
-    // 确保我们没有创建对象
-    alt.Utils.assert(luckyWheelObject == null)
+    // 确保没有已创建的对象
+    alt.Utils.assert(luckyWheelObject == null);
 
-    const rot = alt.Vector3.zero
-    luckyWheelObject = new alt.LocalObject('vw_prop_vw_luckywheel_02a', object.pos, rot)
+    const rot = alt.Vector3.zero;
+    luckyWheelObject = new alt.LocalObject('vw_prop_vw_luckywheel_02a', object.pos, rot);
 
-    const spinStartTime = object.getStreamSyncedMeta('spinStartTime')
-    if (spinStartTime == null) return
-    startSpin(spinStartTime)
+    const spinStartTime = object.getStreamSyncedMeta('spinStartTime');
+    if (spinStartTime == null) return;
+    startSpin(spinStartTime);
 })
 
 alt.on('worldObjectStreamOut', (object) => {
-    if (!isItLuckyWheel(object)) return
+    if (!isItLuckyWheel(object)) return;
 
-    alt.log('Lucky wheel stream out')
+    alt.log('Lucky wheel stream out');
 
-    luckyWheelObject?.destroy()
-    luckyWheelObject = null
-    currentSpinTick?.destroy()
-    currentSpinTick = null
+    luckyWheelObject?.destroy();
+    luckyWheelObject = null;
+    currentSpinTick?.destroy();
+    currentSpinTick = null;
 })
 
 alt.on('streamSyncedMetaChange', (object, key, value) => {
-    if (!isItLuckyWheel(object)) return
+    if (!isItLuckyWheel(object)) return;
 
     // 确保我们已经创建了对象
-    alt.Utils.assert(luckyWheelObject != null)
+    alt.Utils.assert(luckyWheelObject != null);
 
-    alt.log('Lucky wheel change', { key: value })
+    alt.log('Lucky wheel change', { key: value });
 
     switch (key) {
         case 'spinStartTime':
             // 值被删除
             if (value == null) return
 
-            startSpin(value)
-            break
+            startSpin(value);
+            break;
         case 'type':
             // 忽略
             break
         default:
-            alt.logError('Lucky wheel unknown stream synced meta change key:', key)
+            alt.logError('Lucky wheel unknown stream synced meta change key:', key);
     }
-})
+});
 ```

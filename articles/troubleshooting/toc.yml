@@ -1,4 +1,6 @@
 - name: 客户端
   href: client.md
+- name: 客户端模组
+  href: client-mods.md
 - name: 服务端
   href: server.md

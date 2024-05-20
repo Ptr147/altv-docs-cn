@@ -12,7 +12,7 @@ alt:V内置了语音聊天功能。要启用它，您需要在`server.toml`中�
 
 ## 语音频道
 
-[VoiceChannel class in JS API reference](https://docs.altv.mp/js/api/alt-client.VoiceChannel.html)<br>
+[VoiceChannel class in JS API reference](https://docs.altv.mp/js/api/alt-server.VoiceChannel.html)<br>
 [VoiceChannel class in C# API reference](https://docs.altv.mp/cs/api/AltV.Net.Elements.Entities.VoiceChannel.html)<br>
 
 要允许玩家彼此听到声音，您需要创建一个语音频道并将应该彼此听到的玩家添加到该频道中。
@@ -50,9 +50,5 @@ const globalVoice = new alt.VoiceChannel(true, 15);
 
 alt.on('playerConnect', (player) => {
   globalVoice.addPlayer(player);
-});
-
-alt.on('playerDisconnect', (player) => {
-  globalVoice.removePlayer(player);
 });
 ```

@@ -12,11 +12,11 @@
 
 |                   URL                      |                                    描述                                                      |
 | :----------------------------------------: | :-----------------------------------------------------------------------------------------: |
-| https://api.alt-mp.com/servers               | 统计信息 - 所有服务器上的玩家数量 & 在线服务器数量                             |
-| https://api.alt-mp.com/servers/list          | 服务器 - 有关所有服务器的所有已知信息(名称、描述、IP、语言、网站等)      |  
-| https://api.alt-mp.com/server/MASTERLIST_ID  | 特定服务器 - 过滤服务器列表以选择一个特定服务器。使用服务器令牌唯一的"id" |
-| https://api.alt-mp.com/avg/MASTERLIST_ID/TIME| 平均值 - 返回有关指定服务器的平均数据(TIME = 1d, 7d, 31d)                    |
-| https://api.alt-mp.com/max/MASTERLIST_ID/TIME| 最大值 - 返回有关指定服务器的最大数据(TIME = 1d, 7d, 31d)                      |
+| https://api.alt-mp.com/servers/info               | 统计信息 - 所有服务器上的玩家数量 & 在线服务器数量                             |
+| https://api.alt-mp.com/servers          | 服务器 - 有关所有服务器的所有已知信息(名称、描述、IP、语言、网站等)      |  
+| https://api.alt-mp.com/servers/SERVERID  | 特定服务器 - 过滤服务器列表以选择一个特定服务器。使用服务器令牌唯一的"id" |
+| https://api.alt-mp.com/servers/SERVERID/avg/TIME | 平均值 - 返回有关指定服务器的平均数据(TIME = 1d, 7d, 31d)                    |
+| https://api.alt-mp.com/servers/SERVERID/max/TIME | 最大值 - 返回有关指定服务器的最大数据(TIME = 1d, 7d, 31d)                      |
 
 ## 响应示例  
 ### 统计信息

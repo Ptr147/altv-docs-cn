@@ -287,7 +287,10 @@ Alt.OnPlayerConnect += (player, reason) =>
 
 ## 同步元(Synced Meta)
 
-同步元被分发到所有资源和客户端，可以通过以下方式使用:
+> [!WARNING]
+> 同步元已被弃用，请使用 [流同步元](https://docs.altv.mp/articles/meta_data.html#stream-synced-meta) 或 [emitAllClients](https://docs.altv.mp/js/articles/events/index.html).
+
+同步元会分发到所有资源和客户端，可以通过以下方式使用：
 
 - 全局（应用于alt）
 - 绑定到实体（应用于玩家或车辆）
