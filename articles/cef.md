@@ -4,7 +4,7 @@ Chromium嵌入式框架(也称为CEF)是一个浏览器引擎,用于alt:V渲染�
 
 ## 调试模式
 
-要在客户端启用CEF的调试模式/服务器,您必须在客户端配置中启用 `debug = true` 设置。  
+要在客户端启用 CEF 的调试模式/服务器，必须在 [客户端配置] (~/articles/configs/client.md) 中启用 `debug = true` 设置。
 
 然后,调试服务器在`localhost:9222`(在Chromium或较旧版本的Chrome)或`chrome://inspect`(在较新版本的Chrome)中可用。
 

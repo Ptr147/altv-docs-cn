@@ -22,13 +22,14 @@
 
 #### 主服务器连接失败。无效令牌  
 
-在您的 `server.toml` 中,您可以找到一个名为 `announce` 的配置变量。如果此变量设置为 `true`, 您将需要一个 **有效** 的令牌。因此,您需要从alt:V主机列表机器人请求主机列表令牌。要接收令牌,您需要向Discord上的 `Master-Bot#3667` 发送一条内容为"token"的消息。要获得令牌,您必须满足以下要求之一:
-
-1. 您可以通过等待30天生成一个令牌来获得广播到主机列表的令牌。  
-2. 您可以立即通过订阅铜牌赞助者生成令牌。如果您想选择这条路线,可以访问https://www.patreon.com/altVMP订阅。  
+Inside your `server.toml` you can find a configuration variable called `announce`. If this is set to `true`, you will need a **valid** token. Therefore, you need to copy a master list token from [Server Manager](https://my.alt-mp.com).
 
 请记住,在开发阶段,您通常不需要主机列表公告。您可以在 `server.toml` 内将 `announce`标 志设置为 `false` 。  
 
 #### 未处理异常:收到来自...的未处理异常  
 
-当您在服务器端使用C#时,您会有时遇到此问题。您可以轻松解决此问题,方法是更新alt:V NuGet包并重新生成您的资源。
+When you use C# on your server-side, you will encounter this problem sometimes. You can easily solve this problem by updating the alt:V NuGet packages and rebuilding your resource.
+
+#### Error Invalid get_hostfxr_path
+
+When you use C# on your server-side and doesn't have installed .NET runtime on your computer, you will encounter this problem. You need to download .NET runtime from official website and restart alt:V server.

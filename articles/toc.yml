@@ -90,3 +90,7 @@
       href: rmlui/debugging.md
 - name: 防作弊指南(非官方)
   href: https://github.com/MyHwu9508/alt-V-Anticheat-Guide/blob/main/README.md
+- name: 降落伞同步
+  href: parachute_sync.md
+- name: 配置 Grafana
+  href: setup_grafana.md

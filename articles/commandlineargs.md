@@ -35,6 +35,6 @@
 
 | 键       |             描述           | 
 | ------    | :-------------------------------: |
-|   start [resourcename]    |   按名称启动服务器资源    |  
+|   start [resourcename]    |   按名称启动服务器资源     |
 |   stop [resourcename]     |   按名称停止服务器资源     |
-|   restart [resourcename]  |   按名称重启服务器资源  |
+|   restart [resourcename]  |   按名称重启服务器资源 (如果[`客户端文件'](https://docs.altv.mp/articles/configs/resource.html) 被更改，客户端也会重新下载这些文件)  |

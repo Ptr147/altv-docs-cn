@@ -1,6 +1,24 @@
-# `server.toml` 配置文件
-`server.toml` 文件是最重要的配置文件,它是整个服务器的主要配置文件,并将定义 
-像服务器名称、插槽数量、加载的资源等重要配置。  当前的 `server.cfg` YAML 格式已被弃用,但仍支持。这里是 `server.toml` 的所有配置选项及其用途的列表: 
+# The `server.toml` configuration file
+
+The `server.toml` file is the most important configuration file, it is the main configuration file for your whole server, and will define
+important configurations like server name, amount of slots, loaded resources and more.
+
+## Basic configuration for development of JS resources
+```toml
+# An array of all modules (specific language support on server-side) that should be loaded
+modules = ["js-module"]
+# An array of all resources that should be loaded
+resources = ["example"]
+
+# Enables reconnect command, CEF debug and other developer features
+debug = true
+```
+
+Here is a list of all configuration options for the `server.toml` and what they are used for:
+
+> [!WARNING]
+> DO NOT copy all options into your server config, only use the options you **really** need.
+
 ```toml
 # 您的服务器显示名称 
 name = "我的服务器名称"
@@ -39,16 +57,21 @@ announceRetryErrorAttempts = 50
 # 可以使用相同 IP 地址连接的最大玩家数 
 duplicatePlayers = 4096# 定义地图边界大小 
 
+# Enable or disable syncedMetadata
+enableSyncedMetaData = true
+
 # Key for shared resources. Can be used to share resources between multiple servers, so users don't have to download them separatedly
 sharedProjectKey = "altv-shared"
 # Display name for shared resources bundle (visible in alt:V client settings)
 sharedProjectName = "alt:V shared"
 
-# The amount of server side managed entities per type that can be streamed at the same time per player. If more than the set amount of entities are in streaming range, the closest n entities (as defined below) of the specific type will be streamed. Changing these values can cause performance and stability issues.
-[maxStreaming]
-peds = 128 # Max 220, shared type for server side created NPC peds + player peds
-objects = 120 # Max 120, server side created objects
-vehicles = 128  # Max 220, server side created vehicles
+# Max size of client to server script events in bytes
+maxClientScriptEventSize = 8192
+# Max size of server to client script events in bytes
+maxServerScriptEventSize = 524288
+
+#When false unknown rpc events will result in a kick
+allowUnknownRPCEvents = true
 
 # Define the map bound size
 mapBoundsMinX = -10000
@@ -77,8 +100,9 @@ useEarlyAuth = false
 earlyAuthUrl = "https://example.com/login"
 # 您的服务器是否应使用 CDN
 useCdn = false
-# CDN 页面的 URL
-cdnUrl = "https://cdn.example.com"
+# The url for the CDN page
+# Outdated Notation: "https://cdn.example.com"
+cdnUrl = "cdn.example.com:443"
 
 # alt:V 服务器是否应在连接时发送所有客户端的玩家名称
 sendPlayerNames = true
@@ -112,6 +136,16 @@ dlcWhitelist = [
 # Obfuscate resource names
 hashClientResourceName = true
 
+# Disables creation of props marked as "optional"
+disableOptionalProps = false
+
+# The amount of server side managed entities per type that can be streamed at the same time per player. If more than the set amount of entities are in streaming range, the closest n entities (as defined below) of the specific type will be streamed. Changing these values can cause performance and stability issues.
+[maxStreaming]
+peds = 128 # Max 220, shared type for server side created NPC peds + player peds
+objects = 120 # Max 120, server side created objects
+vehicles = 128  # Max 220, server side created vehicles
+entities = 128 # Defined the max limit of entities, indepent of type, that can be streamed at the same time
+
 # Configure GTA game pool sizes to extend them. These game pools define the limits of certain aspects in the game, extending them can and will cause stability and performance issues. Please test changes carefully.
 # See this article for a complete list of game pools: https://docs.altv.mp/gta/articles/tutorials/overwrite_gameconfig.html
 [pools]
@@ -130,7 +164,15 @@ migration = 1 # Processing of netowner calculations
 syncSend = 8 # Processing of sending sync data, should be always the highest amount
 syncReceive = 2 # Processing of receiving sync data, should be around 1/4 of syncSend
 
-# js-module 相关设置
+[antiCheat]
+# Enables server-side weapon checks
+# For example, if a weapon is given via giveWeaponToPed native it won't be synced
+weaponSwitch = true
+
+# Enables collision checks so natives like setEntityNoCollisionEntity will not work
+collision = true
+
+# Settings related to js-module
 [js-module]
 # "https://nodejs.org/api/cli.html#--enable-source-maps"
 source-maps = true  
@@ -144,10 +186,6 @@ global-webcrypto = true
 network-imports = true
 # Add extra cli arguments to the node environment "https://nodejs.org/api/cli.html"
 extra-cli-args = ["--max-old-space-size=8192"]
-# Enable node.js inspector
-[js-module.inspector]
-host = "127.0.0.1"
-port = 9229
 
 # Settings related to c#-module
 [csharp-module]

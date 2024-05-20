@@ -19,14 +19,14 @@
 > [!TIP]
 > 查看 <a href='https://forge.plebmasters.de/objects'>Pleb Masters: Forge</a> 所有对象的完整列表。
 
-## Usage
+## 用法
 
 [Object class in JS API reference](https://docs.altv.mp/js/api/alt-server.Object.html)<br>
 [Object class in C# API reference](https://docs.altv.mp/cs/api/AltV.Net.Elements.Entities.Object.html)<br>
 
-### Example
+### 案例
 
 ```js
 // 创造物理同步足球
-let object = new alt.Object("p_ld_soc_ball_01",  new alt.Vector3(0,0,70), new.alt.Vector3(0,0,0));
+let object = new alt.Object("p_ld_soc_ball_01",  new alt.Vector3(0,0,71), new alt.Vector3(0,0,0));
 ```

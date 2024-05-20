@@ -18,6 +18,9 @@ The system also supports custom filters (see [Voice docs](voice.md)) and GTA aud
 
 In order to use Audio API you need to create Audio instance and add one or multiple audio outputs to it.
 
+> [!WARNING]
+> Currently, a maximum of 64 Audio instances can be created.
+
 ### Audio outputs
 
 There are three types of audio outputs in alt:V API:
@@ -101,7 +104,7 @@ Audio categories starting with `video_editor_*` are in most cases unused and can
 const radio = alt.AudioCategory.getForName("radio"); // Using the game radio audio category as source
 const category = alt.AudioCategory.getForName("video_editor_weapons_guns_bullet_impacts"); // This will be our target 'custom' audio category
 
-category.volume = 1000;
+category.volume = 10;
 category.distanceRolloffScale = radio.distanceRolloffScale;
 category.plateauRolloffScale = radio.plateauRolloffScale;
 category.occlusionDamping = radio.occlusionDamping;
@@ -117,7 +120,7 @@ category.lowPassFilterCutoff = radio.lowPassFilterCutoff;
 category.highPassFilterCutoff = radio.highPassFilterCutoff;
 
 // Lets use our 'custom' audio category to play audio
-const output = new alt.AudioOutputFrontend("video_editor_weapons_guns_bullet_impacts");
+const output = new alt.AudioOutputFrontend(alt.hash("video_editor_weapons_guns_bullet_impacts"));
 const audio = new alt.Audio("https://upload.wikimedia.org/wikipedia/commons/c/c8/Example.ogg");
 audio.addOutput(output);
 audio.play();

@@ -6,7 +6,7 @@
 
 ## 设置外部语音服务器  
 
-首先,必须下载语音服务器,可以在[CDN](https://docs.altv.mp/articles/cdn_links.html)文章的Windows Server和Linux Server主题下找到链接。  
+首先，必须下载语音服务器，这可以通过 [altv-pkg](https://github.com/altmp/altv-pkg) 自动完成，也可以手动完成，相关链接可在 Windows 服务器和 Linux 服务器主题下的 [CDN](https://docs.altv.mp/articles/cdn_links.html) 文章中找到
 
 下载后,语音服务器可以放置在任何服务器上(它也可以是alt:V服务器的同一设备)。  
 
@@ -34,6 +34,13 @@ secret = 1234567890
 要集成 alt:V 服务器,只需对 server.toml 进行少量调整:
 
 ```toml
+# Define the map bound size
+mapBoundsMinX = -10000
+mapBoundsMinY = -10000
+mapBoundsMaxX = 65536
+mapBoundsMaxY = 65536
+mapCellAreaSize = 100 #smaller areas uses more ram and less cpu
+
 [voice]
 streamingTickRate = 10
 # 语音服务器的比特率  
@@ -49,11 +56,4 @@ externalPort = 7798
 externalPublicHost = "xx.xx.xx.xx"  
 # 外部主机公共端口  
 externalPublicPort = 7799
-
-# Define the map bound size
-mapBoundsMinX = -10000
-mapBoundsMinY = -10000
-mapBoundsMaxX = 65536
-mapBoundsMaxY = 65536
-mapCellAreaSize = 100 #smaller areas uses more ram and less cpu
 ```
